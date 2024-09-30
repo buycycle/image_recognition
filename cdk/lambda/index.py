@@ -3,6 +3,7 @@ import boto3
 import base64
 from google.cloud import vision
 from botocore.exceptions import ClientError
+from model import get_google_vision_client, process_image
 # Initialize the S3 client
 s3_client = boto3.client('s3')
 # Initialize the Secrets Manager client
@@ -31,34 +32,11 @@ def lambda_handler(event, context):
     google_project_name = secret['IMAGE_RECOGNITION_GOOGLE_PROJECT_NAME']
 
     # Initialize the Google Vision client with the API key
-    vision_client = vision.ImageAnnotatorClient.from_service_account_json(google_api_key)
+    vision_client = get_google_vision_client(google_api_key_path)
 
-    # Convert image data to base64
-    image_base64 = base64.b64encode(image_data).decode('utf-8')
+    # Process the image using the model logic
+    most_likely_family_id = process_image(image_data, vision_client)
 
-    # Call Google Vision API
-    response = vision_client.web_detection({
-        'image': {
-            'content': image_base64
-        }
-    })
-
-    # Process the response
-    web_detection = response.web_detection
-    entities = web_detection.web_entities
-    # Filter entities based on score
-    filtered_entities = [entity for entity in entities if entity.score > 0.5]
-
-    # Match entities to family IDs (example logic)
-    family_ids = ['mountain_bike', 'road_bike', 'hybrid_bike']
-    matches = []
-    for entity in filtered_entities:
-        for family_id in family_ids:
-            if family_id in entity.description.lower():
-                matches.append(family_id)
-
-    # Determine the most likely family_id
-    most_likely_family_id = max(set(matches), key=matches.count) if matches else None
     return {
         'statusCode': 200,
         'body': json.dumps({'most_likely_family_id': most_likely_family_id})
