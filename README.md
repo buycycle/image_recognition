@@ -12,12 +12,11 @@ The primary objective of this project is to develop a robust image recognition m
 6. **Result Return**: The top n similar matches are returned directly from the Lambda function.
 ### Schematic
 [View Schematic](https://excalidraw.com/#json=_mKcmwEdqvZDs1Urlapc7,crsQy1z9jc7mZNr8755P3g)
-
 ## Getting Started
 ### Prerequisites
 - An AWS account with access to S3 and Lambda.
 - A Google Cloud account with access to the Vision AI API.
-- AWS CLI and SAM CLI installed on your local machine.
+- AWS CLI and CDK installed on your local machine.
 - Python 3.7 or higher.
 ### Installation
 1. **Clone the Repository**
@@ -25,26 +24,21 @@ The primary objective of this project is to develop a robust image recognition m
    git clone https://github.com/yourusername/bicycle-image-recognition-lambda.git
    cd bicycle-image-recognition-lambda
    ```
-2. **Set Up Google Cloud Project**
-   - Create a new project in the [Google Cloud Console](https://console.cloud.google.com/).
-   - Enable the Vision AI API for your project.
-   - Set up authentication by creating a service account and downloading the JSON key file. Store this key file securely as it will be used in the Lambda function.
-3. **Set Up AWS Resources**
-   - Create an S3 bucket for image uploads.
-4. **Deploy the Lambda Function**
-   - Update the `template.yaml` file with your S3 bucket name and other configurations.
-   - Deploy the Lambda function using AWS SAM CLI:
+2. **Deploy the CDK Stack**
+   - Deploy the CDK stack:
      ```bash
-     sam build
-     sam deploy --guided
+     cdk deploy
      ```
-### Usage
+## Usage
 1. **Upload an Image**
-   - Upload an image of a bicycle to the designated S3 bucket.
+   - Use a tool like Postman or curl to upload an image to the API Gateway endpoint.
+     ```bash
+     curl -X POST -F "file=@path/to/your/image.jpg" https://<api-id>.execute-api.<region>.amazonaws.com/prod/upload
+     ```
 2. **Trigger Lambda Function**
-   - The S3 upload event will automatically trigger the Lambda function.
+   - The API Gateway will trigger the Lambda function, which will process the image and return the most likely `family_id`.
 3. **View Results**
-   - The Lambda function will process the image and return the most likely `family_id`.
+   - The response from the Lambda function will be returned directly to the client.
 ## How It Works
 ### AWS Lambda Integration
 The Lambda function is triggered by an S3 event whenever a new image is uploaded to the designated S3 bucket. The function reads the image from S3 and sends it to Google Vision AI's Web Detection API.
@@ -64,3 +58,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [Google Cloud Vision API](https://cloud.google.com/vision) for providing the web detection capabilities.
 - [AWS Lambda](https://aws.amazon.com/lambda/) for serverless computing.
 - [AWS S3](https://aws.amazon.com/s3/) for storage.
+
