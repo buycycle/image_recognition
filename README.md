@@ -25,7 +25,6 @@ The primary objective of this project is to develop a robust image recognition m
    cd bicycle-image-recognition-lambda
    ```
 2. **Deploy the CDK Stack**
-   - Deploy the CDK stack:
      ```bash
      cdk deploy
      ```
