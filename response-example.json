@@ -1,3 +1,9 @@
+// test_1
+// 36	Strada Due TEAM FORCE AXS eTap 2019
+// 37	Strada Due TEAM FORCE AXS eTap 2020
+// 160661	Strada Due TEAM FORCE AXS eTap 2020
+// 162274	Strada Due TEAM FORCE AXS eTap 2019
+// 162275	Strada Due TEAM FORCE AXS eTap 2019
 web_detection {
     web_entities {
       entity_id: "/m/09rgp"
@@ -187,3 +193,570 @@ web_detection {
       language_code: "en"
     }
   }
+
+// test_2
+// 84475 SuperSix EVO Hi-MOD 2 2023
+// 126112 SuperSix EVO Hi-MOD 2 2024
+web_detection {
+  web_entities {
+    entity_id: "/m/09rgp"
+    score: 0.964621603
+    description: "Road Bike"
+  }
+  web_entities {
+    entity_id: "/m/03hrb5"
+    score: 0.915151
+    description: "Racing bicycle"
+  }
+  web_entities {
+    entity_id: "/g/11wc0x1y2l"
+    score: 0.792000055
+    description: "Cannondale SuperSix EVO Hi-MOD 2"
+  }
+  web_entities {
+    entity_id: "/m/0_mjp"
+    score: 0.765023351
+    description: "Mountain Bike"
+  }
+  web_entities {
+    entity_id: "/m/0199g"
+    score: 0.733
+    description: "Bike"
+  }
+  web_entities {
+    entity_id: "/g/11w46zxpq_"
+    score: 0.71841
+    description: "Cannondale SuperSix EVO 4"
+  }
+  web_entities {
+    entity_id: "/g/1yw7gpt5b"
+    score: 0.7116
+    description: "Cannondale"
+  }
+  web_entities {
+    entity_id: "/m/0wjc52f"
+    score: 0.5805
+    description: "BikeRadar"
+  }
+  web_entities {
+    entity_id: "/m/01bqk0"
+    score: 0.541
+    description: "Bike Wheel"
+  }
+  web_entities {
+    entity_id: "/m/03hs6w"
+    score: 0.515412092
+    description: "Cyclocross Bike"
+  }
+  partial_matching_images {
+    url: "https://imgcache.dealmoon.com/thumbimg.dealmoon.com/dealmoon/f60/c2b/396/59e1ea834e78d3aa9230060.png_1080_0_40_44d7.png"
+  }
+  partial_matching_images {
+    url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-EVO-Hi-Mod-2-01-c5366c5.jpg?webp=1&w=1200"
+  }
+  partial_matching_images {
+    url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?w=1200"
+  }
+  partial_matching_images {
+    url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?w=1029&webp=1"
+  }
+  partial_matching_images {
+    url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?quality=45&resize=768,574"
+  }
+  partial_matching_images {
+    url: "https://www.rabe-bike.de/img/0/0/resize/catalog/product/c/a/cannondale_supersix_evo_hi-mod_2_matte_black_2024-1.jpg"
+  }
+  partial_matching_images {
+    url: "https://bikeyourselfmilano.it/wp-content/uploads/2024/01/V3-MKBR-removebg-preview.png"
+  }
+  partial_matching_images {
+    url: "https://www.tradeinn.com/f/14070/140704495/merida-scultura-8000-ultegra-di2-2024-racercykel.webp"
+  }
+  partial_matching_images {
+    url: "https://static.wixstatic.com/media/013723_b1f8dbd247614726b05dd559be5d16c0~mv2.png/v1/fit/w_500,h_500,q_90/file.png"
+  }
+  partial_matching_images {
+    url: "https://1.bp.blogspot.com/-U-Wf-4XzasQ/XaieUD9IRpI/AAAAAAAA46M/jpSTCJ-HtbE1mVagYLKDV1mqIegXkDz_QCLcBGAsYHQ/s1080/Argon%2B18%2BKRYPTON%2BPRO.jpg"
+  }
+  pages_with_matching_images {
+    url: "https://www.bikeradar.com/advice/buyers-guides/best-road-bikes"
+    page_title: "Best road bikes 2024 | Top-rated endurance, race and budget bikes"
+    partial_matching_images {
+      url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-EVO-Hi-Mod-2-01-c5366c5.jpg?webp=1&w=1200"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.westbrookcycles.co.uk/bikes/road_bikes/cannondale"
+    page_title: "Buy Cannondale Road Bikes Online At Westbrook Cycles"
+    partial_matching_images {
+      url: "https://content.westbrookcycles.co.uk/medium/5cc8afba_cad15.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.bikeradar.com/reviews/bikes/road-bikes/cannondale-supersix-evo-hi-mod-2-review"
+    page_title: "Cannondale SuperSix Evo Hi-Mod 2 review - Road Bikes - BikeRadar"
+    partial_matching_images {
+      url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?w=1029&webp=1"
+    }
+    partial_matching_images {
+      url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-EVO-Hi-Mod-2-01-c5366c5.jpg?webp=1&w=1200"
+    }
+    partial_matching_images {
+      url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?quality=45&resize=768,574"
+    }
+    partial_matching_images {
+      url: "https://c02.purpledshub.com/uploads/sites/39/2023/05/Cannondale-SuperSix-Evo-Hi-Mod-BOT-ad1d33f.jpg?w=1200"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.argon18.com/en/bikes"
+    page_title: "Bike lineup | Argon 18"
+    partial_matching_images {
+      url: "https://storage.googleapis.com/argon18craft/products/2024/_homeFeaturedProducts/Subito-eRoad_360A_Shimano-105_profil.png"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.cycleexchange.co.uk/products/specialized-tarmac-sl8-pro-force-2024-54"
+    page_title: "Specialized Tarmac SL8 Pro Sram Force AXS Disc Road Bike 2024 ..."
+    partial_matching_images {
+      url: "https://www.cycleexchange.co.uk/cdn/shop/files/17283543-011.jpg?v=1711373499&width=480"
+    }
+    partial_matching_images {
+      url: "https://www.cycleexchange.co.uk/cdn/shop/files/17283543-011_grande.jpg?v=1711373499"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.sigmasports.com/bikes/road-bikes/performance"
+    page_title: "Performance Road Bikes | Sigma Sports"
+    partial_matching_images {
+      url: "https://dbyvw4eroffpi.cloudfront.net/product-media/74TX/304/304/Cannondale-SuperSix-EVO-2-Disc-Road-Bike-2024-Sonic-Blue.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.sigmasports.com/clearance/bikes/road-bikes"
+    page_title: "Road Bike Sale | Road Bike Clearance From £649.00 | Sigma Sports"
+    partial_matching_images {
+      url: "https://dbyvw4eroffpi.cloudfront.net/product-media/74TX/304/304/Cannondale-SuperSix-EVO-2-Disc-Road-Bike-2024-Sonic-Blue.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.westbrookcycles.co.uk/bikes/road_bikes"
+    page_title: "Road Bikes, Carbon & Alloy Road Bikes | Westbrook Cycles"
+    partial_matching_images {
+      url: "https://content.westbrookcycles.co.uk/medium/5cc8afba_cad15.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.sigmasports.com/brand/cannondale"
+    page_title: "Cannondale | Bikes, Components & Accessories - Sigma Sports"
+    partial_matching_images {
+      url: "https://dbyvw4eroffpi.cloudfront.net/product-media/74TX/304/304/Cannondale-SuperSix-EVO-2-Disc-Road-Bike-2024-Sonic-Blue.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.sigmasports.com/bikes/cannondale/road"
+    page_title: "Cannondale | Road Bikes - Sigma Sports"
+    partial_matching_images {
+      url: "https://dbyvw4eroffpi.cloudfront.net/product-media/74TX/304/304/Cannondale-SuperSix-EVO-2-Disc-Road-Bike-2024-Sonic-Blue.jpg"
+    }
+  }
+  visually_similar_images {
+    url: "https://asset.scott-sports.com/fit-in/630x420/bik/bike-630x420-FoilRC_2022_SCOTT_BIKE_BEAUTY_12_0020_2135486.jpg?signature=671691a61aa107302b9c2ffec177093287a7a40e66bfbe1ed8d82d21cac5ef68"
+  }
+  visually_similar_images {
+    url: "https://media.licdn.com/dms/image/sync/v2/D4D27AQHe3-x5G6THew/articleshare-shrink_800/articleshare-shrink_800/0/1726579263992?e=2147483647&v=beta&t=RAImNIoOvJzosT0Di6HJPhnbBKjZHZWTa71ogC7Y3PA"
+  }
+  visually_similar_images {
+    url: "https://media.licdn.com/dms/image/v2/D4E22AQGqcjA3tCX7Bw/feedshare-shrink_800/feedshare-shrink_800/0/1726839101896?e=2147483647&v=beta&t=e7HX5KAqwVCwnF0kgUyMWyMe6nBvrV7W64Gfvopy7-Q"
+  }
+  visually_similar_images {
+    url: "https://stenger-bike.de/cdn/shop/files/1001021-004.jpg?height=600&v=1711652232&width=600"
+  }
+  visually_similar_images {
+    url: "https://www.bikeride.com/images/bike/Specialized-Venge-Sagan-e1585708020522.jpg"
+  }
+  visually_similar_images {
+    url: "https://www.theproscloset.com/cdn/shop/files/BGR15359-1.jpg?crop=center&height=2048&v=1726860309&width=2048"
+  }
+  visually_similar_images {
+    url: "https://www.faz.net/kaufkompass/wp-content/uploads/2024/07/azfmacher-cyclite-1280x720.jpg"
+  }
+  visually_similar_images {
+    url: "https://www.theproscloset.com/cdn/shop/files/BRD35790-2.jpg?crop=center&height=2048&v=1727115423&width=2048"
+  }
+  visually_similar_images {
+    url: "https://media.licdn.com/dms/image/v2/D4E22AQHuFgAO8ES26A/feedshare-shrink_800/feedshare-shrink_800/0/1721383319947?e=2147483647&v=beta&t=1Vp-ITJrHjUY1AyGroasbhiipqLYM1XEcVGkug2nW3s"
+  }
+  visually_similar_images {
+    url: "https://media04.meinbezirk.at/article/2024/06/25/1/40507041_XXL.jpg?1719297877"
+  }
+  best_guess_labels {
+    label: "best road bike 2024"
+    language_code: "en"
+  }
+}
+
+// test_3
+// 128454 Speedmax CF SLX 8 AXS 1by 2024
+// 135749 Speedmax CF SLX 8 AXS 1by 2023
+web_detection {
+  web_entities {
+    entity_id: "/m/0_mjp"
+    score: 0.879271
+    description: "Mountain Bike"
+  }
+  web_entities {
+    entity_id: "/m/0199g"
+    score: 0.743
+    description: "Bike"
+  }
+  web_entities {
+    entity_id: "/g/11hc_rr_mw"
+    score: 0.715
+    description: "Canyon"
+  }
+  web_entities {
+    entity_id: "/m/09rgp"
+    score: 0.7027
+    description: "Road Bike"
+  }
+  web_entities {
+    entity_id: "/m/01bqgn"
+    score: 0.7007
+    description: "Bike Frame"
+  }
+  web_entities {
+    entity_id: "/m/0bh99y_"
+    score: 0.631115258
+    description: "Electric Bike"
+  }
+  web_entities {
+    entity_id: "/m/03p2h9"
+    score: 0.625172436
+    description: "Hybrid Bike"
+  }
+  web_entities {
+    entity_id: "/m/05q583_"
+    score: 0.5586
+    description: "Canyon Bicycles"
+  }
+  web_entities {
+    entity_id: "/t/22yqvrj199pc6"
+    score: 0.5586
+  }
+  web_entities {
+    entity_id: "/g/11sv331n6z"
+    score: 0.5451
+    description: "Cipollini, Racing bikes, (51.20 cm)"
+  }
+  full_matching_images {
+    url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=1272"
+  }
+  full_matching_images {
+    url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=770"
+  }
+  full_matching_images {
+    url: "https://d2yn9m4p3q9iyv.cloudfront.net/_products/buycycle/22743/400.webp"
+  }
+  full_matching_images {
+    url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=350"
+  }
+  full_matching_images {
+    url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=302"
+  }
+  pages_with_matching_images {
+    url: "https://buycycle.com/en-us/shop/categories/triathlon"
+    page_title: "Buy used triathlon bikes | buycycle USA"
+    full_matching_images {
+      url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=350"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://buycycle.com/it-it/shop/brands/canyon/categories/triathlon/families/speedmax"
+    page_title: "Bici Triathlon Canyon | Risparmia sulle bici usate | buycycle Italia"
+    full_matching_images {
+      url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=350"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://buycycle.com/de-de/shop/brands/canyon/categories/triathlon/families/speedmax"
+    page_title: "Canyon Triathlon Bikes | Sparen Sie bei gebrauchten Fahrrädern"
+    full_matching_images {
+      url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=350"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://buycycle.com/en-us/bike/speedmax-cfr-etap-2024-43158"
+    page_title: "Canyon Speedmax CFR eTap used in M | buycycle USA"
+    full_matching_images {
+      url: "https://d1mgeijqpfaspl.cloudfront.net/uploads/bike/media/1007664/f44a5282-7018-4da0-bcb2-26ec8fdb15ce.webp?width=350"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://99spokes.com/es-ES/compare?bikes=cervelo-p-series-ultegra-di2-2024,canyon-speedmax-cf-slx-8-di2-2024,canyon-speedmax-cf-7-2024"
+    page_title: "2024 Cervélo P-Series Ultegra Di2 vs Canyon Speedmax CF SLX 8 ..."
+    full_matching_images {
+      url: "https://d2yn9m4p3q9iyv.cloudfront.net/_products/buycycle/22743/400.webp"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://99spokes.com/en/bikes/canyon/2023/speedmax-cfr-axs-1by"
+    page_title: "2023 Canyon Speedmax CFR AXS 1by - 99 Spokes"
+    full_matching_images {
+      url: "https://d2yn9m4p3q9iyv.cloudfront.net/_products/buycycle/22743/400.webp"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://99spokes.com/es-ES/compare?bikes=trek-speed-concept-slr-6-etap-2023,trek-speed-concept-slr-7-2023,trek-speed-concept-slr-7-etap-2023,trek-speed-concept-slr-9-2023,trek-speed-concept-slr-9-etap-2023"
+    page_title: "Compare: 2023 Trek Speed Concept SLR 6 eTap vs ... - 99 Spokes"
+    full_matching_images {
+      url: "https://d2yn9m4p3q9iyv.cloudfront.net/_products/buycycle/22743/400.webp"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://99spokes.com/en-NL/bikes/ribble/2024/ultra-tri-disc-hero?nxtPmakerId=ribble&nxtPyear=2024&nxtPmodelId=ultra-tri-disc-hero"
+    page_title: "2024 Ribble Ultra Tri Disc - Hero – Specs, Comparisons, Reviews"
+    full_matching_images {
+      url: "https://d2yn9m4p3q9iyv.cloudfront.net/_products/buycycle/22743/400.webp"
+    }
+  }
+  visually_similar_images {
+    url: "https://cdn.triathlete.com/wp-content/uploads/2023/06/Canyon-Speedmax-CF-SLX-7.jpg"
+  }
+  visually_similar_images {
+    url: "https://cdn.triathlete.com/wp-content/uploads/2024/06/Canyon-Speedmax-CF-7-.jpg"
+  }
+  visually_similar_images {
+    url: "https://cdn.triathlete.com/wp-content/uploads/2023/06/Quintana-Roo-V-PRi.jpg"
+  }
+  visually_similar_images {
+    url: "https://cdn.triathlete.com/wp-content/uploads/2023/06/Felt-IAx.jpg"
+  }
+  visually_similar_images {
+    url: "https://cdn.triathlete.com/wp-content/uploads/2024/06/Copy-of-Featured-31.jpg"
+  }
+  visually_similar_images {
+    url: "https://storage.googleapis.com/argon18craft/products/2025/E117/117D.374A.2D.1_profil.jpg"
+  }
+  visually_similar_images {
+    url: "https://swiftbicycles.com/cdn/shop/collections/time-trial_1080x.jpg?v=1660659958"
+  }
+  visually_similar_images {
+    url: "https://www.argon18bike.jp/wp-content/uploads/2021/03/KAILUA-FULL-MOON-scaled-768x512.jpg"
+  }
+  visually_similar_images {
+    url: "https://www.argon18bike.jp/wp-content/uploads/2019/11/E118Triplus-768x512.jpg"
+  }
+  visually_similar_images {
+    url: "https://www.argon18bike.jp/wp-content/uploads/2020/10/e-117tri-db_black_02-768x512.jpeg"
+  }
+  best_guess_labels {
+    label: "mountain bike"
+  }
+}
+
+// test_4 -> need to also exam slug column
+// 45569	AIM EX 2021	aim-ex-2021
+// 51404	 AIM EX	cube-aim-ex-3
+// 149921	AIM EX 2021	cube-aim-ex-2021
+web_detection {
+  web_entities {
+    entity_id: "/m/0_mjp"
+    score: 0.939420879
+    description: "Mountain Bike"
+  }
+  web_entities {
+    entity_id: "/g/11shrqlpxh"
+    score: 0.82291
+    description: "Cube Aim EX Hardtail Mountain Bike (2023)"
+  }
+  web_entities {
+    entity_id: "/g/11bx9kg5wr"
+    score: 0.7226
+    description: "CUBE"
+  }
+  web_entities {
+    entity_id: "/m/0199g"
+    score: 0.7166
+    description: "Bike"
+  }
+  web_entities {
+    entity_id: "/m/0ddc592"
+    score: 0.7073
+    description: "Cube Bikes"
+  }
+  web_entities {
+    entity_id: "/m/01sgl"
+    score: 0.523
+    description: "Cycling"
+  }
+  web_entities {
+    entity_id: "/m/03hrb5"
+    score: 0.480780929
+    description: "Racing bicycle"
+  }
+  web_entities {
+    entity_id: "/g/11vzsj7mdq"
+    score: 0.47047
+    description: "Cube Aim Pro Hardtail Mountain Bike (2023)"
+  }
+  web_entities {
+    entity_id: "/g/11p5cmkq70"
+    score: 0.4123
+    description: "With Hydraulic Brake"
+  }
+  web_entities {
+    entity_id: "/m/01bqgn"
+    score: 0.4102
+    description: "Bike Frame"
+  }
+  partial_matching_images {
+    url: "https://media.smit-sport.de/Artikelbilder/635px/Aim%20EX%2029%20Mountainbike_caramelo-2.jpg"
+  }
+  partial_matching_images {
+    url: "https://www.paulscycles.co.uk/images/701460_o_00.jpg?width=1920&format=webp"
+  }
+  partial_matching_images {
+    url: "https://monzokobikes.cl/img/cms/synqup_701460_O_00.jpg"
+  }
+  partial_matching_images {
+    url: "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=918973446915182"
+  }
+  partial_matching_images {
+    url: "https://velobike.by/images/detailed/233/701460_O_00.jpg"
+  }
+  partial_matching_images {
+    url: "https://product-cdn-frz.alltricks.com/hd/244/732244/2732244/5505362"
+  }
+  partial_matching_images {
+    url: "https://airelibrelatam.com/cdn/shop/files/O_400_81515_601460_O_00_624d3942-c7e6-4df7-b255-051c14611874.jpg?v=1683679203"
+  }
+  partial_matching_images {
+    url: "https://raudor.com/cdn/shop/files/O_400_81515_601460_O_00.jpg?v=1690663286"
+  }
+  partial_matching_images {
+    url: "https://d.scdn.gr/images/sku_images/070898/70898070/20230124120712_dd65645f.jpeg"
+  }
+  partial_matching_images {
+    url: "https://www.zenitsport.ru/assets/images/products/5914/6.jpg"
+  }
+  pages_with_matching_images {
+    url: "https://m.youtube.com/watch?v=G-9sgTl1r6o"
+    page_title: "Cube Aim Ex 2X 2023 - YouTube"
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDgs1K6lGugU_Fe4aYOZUGtcFYxdA"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.alltricks.com/F-11947-velos-complets-vtt/P-2861346-cube_aim_ex_hardtail_mtb_shimano_deore_10s_29___caramel_brown_2023"
+    page_title: "Cube Aim EX Hardtail MTB Shimano Deore 10S 29\'\' Caramel Brown ..."
+    partial_matching_images {
+      url: "https://product-cdn-frz.alltricks.com/hd/244/732244/2732244/5505362"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://m.youtube.com/watch?v=0oNijyKUg8s"
+    page_title: "CUBE AIM EX 1X CARAMEL & BLACK - YouTube"
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDgs1K6lGugU_Fe4aYOZUGtcFYxdA"
+    }
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/maxresdefault.jpg"
+    }
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/mqdefault.jpg"
+    }
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/hqdefault.jpg"
+    }
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/sddefault.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.paulscycles.co.uk/bikes/mountain-bikes/cube-aim-ex-hardtail-mountain-bike-2024-caramelblack__12583"
+    page_title: "Cube Aim EX Hardtail Mountain Bike 2024 Caramel/Black"
+    partial_matching_images {
+      url: "https://www.paulscycles.co.uk/images/701460_o_00.jpg?width=1920&format=webp"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://cubebikestore.mx/products/aim-ex-1x-caramel-black-1"
+    page_title: "CUBE AIM EX CARAMEL & BLACK | Cube Bike Store MX"
+    partial_matching_images {
+      url: "https://cubebikestore.mx/cdn/shop/products/O_400_81515_601460_O_00_624d3942-c7e6-4df7-b255-051c14611874_2048x.jpg?v=1725502546"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.youtube.com/watch?v=xUvU3xath_Y"
+    page_title: "Cube Aim EX grey\'n\'red 2023. - www.huni-bike-shop.hr - YouTube"
+    partial_matching_images {
+      url: "https://i.ytimg.com/vi/0oNijyKUg8s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDgs1K6lGugU_Fe4aYOZUGtcFYxdA"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://cubebikestore.mx/collections/montana-2023"
+    page_title: "Montaña 2023 – Cube Bike Store MX"
+    partial_matching_images {
+      url: "https://cubebikestore.mx/cdn/shop/products/O_400_81515_601460_O_00_624d3942-c7e6-4df7-b255-051c14611874.jpg?v=1725502546&width=1920"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://raudor.com/products/601460"
+    page_title: "Bicicleta de montaña CUBE Aim Ex 1X caramel\'n\'black - Raudor.com"
+    partial_matching_images {
+      url: "https://raudor.com/cdn/shop/files/O_400_81515_601460_O_00.jpg?v=1690663286&width=250"
+    }
+    partial_matching_images {
+      url: "https://raudor.com/cdn/shop/files/O_400_81515_601460_O_00.jpg?v=1690663286"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://redbike.com.ua/ru/good/velosiped-cube-aim-ex-29-2023-caramelnblack"
+    page_title: "Велосипед [Cube Aim EX 29\" 2023]"
+    partial_matching_images {
+      url: "https://redbike.com.ua/files/images/shop/big/cubeaimex2023redbikevelomagazin-1.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://redbike.com.ua/ua/good/velosiped-cube-aim-ex-29-2023-caramelnblack"
+    page_title: "Велосипед [Cube Aim EX 29\" 2023]"
+    partial_matching_images {
+      url: "https://redbike.com.ua/files/images/shop/big/cubeaimex2023redbikevelomagazin-1.jpg"
+    }
+  }
+  visually_similar_images {
+    url: "https://i.ytimg.com/vi/aR4tUAFG8cg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBh1GdRABOkzFHxrmu63hX993ZSxQ"
+  }
+  visually_similar_images {
+    url: "https://i.ytimg.com/vi/3zmoJYrUp6M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBSF-uZTdfuxDH3hhNC5vo-96Nq9w"
+  }
+  visually_similar_images {
+    url: "https://pbs.twimg.com/media/GYeFMfiWAAAIu9J?format=jpg&name=large"
+  }
+  visually_similar_images {
+    url: "https://vader-prod.s3.amazonaws.com/1716386539-aventon-ramblas-e-mtb-0056-65d7ce76bc4b8.jpg"
+  }
+  visually_similar_images {
+    url: "https://media.licdn.com/dms/image/v2/D5605AQHYuuZ1_sACnw/feedshare-thumbnail_720_1280/feedshare-thumbnail_720_1280/0/1714226957676?e=2147483647&v=beta&t=dRFD3x15hIWgDgeSdMn4aYfpNfKSPDs9t4kAlTgElC8"
+  }
+  visually_similar_images {
+    url: "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3442001805130013682"
+  }
+  visually_similar_images {
+    url: "https://api.bikeflip.com/storage/653564/responsive-images/image_picker_F493FA5D-DFAC-4CBF-A1AA-B385409A70E3-71970-00000C113E2618B1___optimized-bike-ad-images_400_300.jpg"
+  }
+  visually_similar_images {
+    url: "https://hips.hearstapps.com/hmg-prod/images/aventon-ramblas-e-mtb-0071-gold-65de5defd7839.jpg"
+  }
+  visually_similar_images {
+    url: "https://www.harfasport.cz/data/images/products/108540/1677165876scale-930_red.jpg"
+  }
+  visually_similar_images {
+    url: "https://media.delius-klasing.de/dpr_auto,fl_progressive,f_auto,c_fill,g_face:auto,h_401,w_534/q_auto:eco/bike/manitou-r-17_9113c84812b334a017681cad2b3899cb"
+  }
+  best_guess_labels {
+    label: "aim ex 2 cube caramel"
+    language_code: "en"
+  }
+}
