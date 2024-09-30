@@ -1,0 +1,189 @@
+web_detection {
+    web_entities {
+      entity_id: "/m/09rgp"
+      score: 0.961762726
+      description: "Road Bike"
+    }
+    web_entities {
+      entity_id: "/m/0_mjp"
+      score: 0.898546159
+      description: "Mountain Bike"
+    }
+    web_entities {
+      entity_id: "/m/03hrb5"
+      score: 0.877653599
+      description: "Racing bicycle"
+    }
+    web_entities {
+      entity_id: "/m/0199g"
+      score: 0.7353
+      description: "Bike"
+    }
+    web_entities {
+      entity_id: "/m/01bqgn"
+      score: 0.7084
+      description: "Bike Frame"
+    }
+    web_entities {
+      entity_id: "/g/11v5g38_51"
+      score: 0.7034
+      description: "3T Strada Due Team Force Etap 2019 Road Bike | Grey - M"
+    }
+    web_entities {
+      entity_id: "/g/1ymzdf15k"
+      score: 0.6231
+      description: "3T"
+    }
+    web_entities {
+      entity_id: "/m/03hs6w"
+      score: 0.59513849
+      description: "Cyclocross Bike"
+    }
+    web_entities {
+      entity_id: "/m/0569_30"
+      score: 0.5226
+      description: "3T Cycling"
+    }
+    web_entities {
+      entity_id: "/m/03p2h9"
+      score: 0.489364833
+      description: "Hybrid Bike"
+    }
+    partial_matching_images {
+      url: "https://www.cyclowired.jp/sites/default/files/images/2019/06/09/dueforceetapsideview.jpg"
+    }
+    partial_matching_images {
+      url: "https://old.cyclesports.jp/sites/default/files/3T3_1.jpg"
+    }
+    partial_matching_images {
+      url: "https://hips.hearstapps.com/hmg-prod/images/steada-due-force-etap-side-1554378503.jpg"
+    }
+    partial_matching_images {
+      url: "http://static.wildto.com/news/20212/1614651120391"
+    }
+    partial_matching_images {
+      url: "https://www.bikebargains.co.uk/wp-content/uploads/2020/08/3T-Strada-Due-Team-Force-AXS-eTap-Aero-Carbon-Road-Bike-Carbon-Frame-Disc-Brakes-24-Speed-700c-Wheels-Double-Chainring-Grey-600x452.jpg"
+    }
+    partial_matching_images {
+      url: "https://i.namu.wiki/i/8dljlZHKfCID-KdpKmFfR3ci22sQNNz9NtdKkdbpLt78zIvf2XPU9lgMxRJj2fFsygonpcdkurANpiOdVjUywg.webp"
+    }
+    partial_matching_images {
+      url: "https://image.kurier.at/images/cfs_616w/3755552/strada-due-01.jpg"
+    }
+    partial_matching_images {
+      url: "https://cdn.myshoptet.com/usr/www.fcimport.cz/user/shop/big/1161-8_due-force-etap-side-view.jpg?5e7610a0"
+    }
+    partial_matching_images {
+      url: "https://www.thesun.co.uk/wp-content/uploads/2020/05/RB-COMP-PRO-BIKES.jpg"
+    }
+    partial_matching_images {
+      url: "https://old.cyclesports.jp/sites/default/files/%E3%83%92%E3%82%99%E3%82%A2%E3%83%B3%E3%82%AD%E3%82%B9%E3%83%95%E3%82%9A%E3%83%AA%E3%83%B3%E3%83%884.jpg"
+    }
+    pages_with_matching_images {
+      url: "https://www.bike-discount.de/en/road-bike"
+      page_title: "Bike Road Bike Online Shop | Bike-Discount"
+      partial_matching_images {
+        url: "https://www.bike-discount.de/media/image/79/21/68/Bianchi-YTB47I55MQ-20144116-Specialissima-Comp-105-Di2-2_300x300@2x.jpg"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://supremebikes.ph/collections/road-bikes"
+      page_title: "Road Bikes - Supreme Bikes PH"
+      partial_matching_images {
+        url: "https://supremebikes.ph/cdn/shop/products/orcam30105.jpg?v=1671783123&width=533"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.bike-discount.de/en/road-bike-carbon"
+      page_title: "Road Bike Carbon"
+      partial_matching_images {
+        url: "https://www.bike-discount.de/media/image/79/21/68/Bianchi-YTB47I55MQ-20144116-Specialissima-Comp-105-Di2-2_300x300@2x.jpg"
+      }
+      partial_matching_images {
+        url: "https://www.bike-discount.de/media/image/01/3f/0f/Bianchi-YTB46I55MQ_6-20138011-Specialissima-Comp-Ultegra-DI2_300x300@2x.jpg"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.picycles.ie/shop/bikes/sub/road/"
+      page_title: "Road Bikes from PI Cycles"
+      partial_matching_images {
+        url: "https://www.picycles.ie/content/products/YTB46I55MQ6jpg_be69cebb261ebdf04d0a1d504c144db0_tmb.jpg"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.tradeinn.com/bikeinn/en/bikes-and-frames-road-bikes/4072/s"
+      page_title: "Road bikes | Bikeinn - Tradeinn"
+      partial_matching_images {
+        url: "https://www.tradeinn.com/h/14077/140770747/bianchi-specialissima-disc-red-etap-axs-2023-road-bike.webp"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.swinnertoncycles.co.uk/giant-m88/shimano-sora-r3000-t565"
+      page_title: "Shimano - Sora - R3000 Giant - Swinnerton Cycles"
+      partial_matching_images {
+        url: "https://www.swinnertoncycles.co.uk/images/giant-road-bike-contend-ar-3-p127122-537121_thumb.jpg"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.strictlybicycles.com/collections/specialized-road-bikes"
+      page_title: "Specialized Road Bikes - Strictly Bicycles"
+      partial_matching_images {
+        url: "https://www.strictlybicycles.com/cdn/shop/files/specialized-aethos-pro-sram-force-etap-axs-strictly-bicycles-1.jpg?v=1707259873&width=460"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://supremebikes.ph/collections/orbea"
+      page_title: "Orbea - Supreme Bikes PH"
+      partial_matching_images {
+        url: "https://supremebikes.ph/cdn/shop/products/orcam30105.jpg?v=1671783123&width=533"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.thearkcycles.co.uk/bikes/road-bikes/"
+      page_title: "Road Bikes at The Ark Cycles | Stroud\'s Independent Bike Shop"
+      partial_matching_images {
+        url: "https://cdn.webshopapp.com/shops/315274/files/418426391/800x800x1/orbea-2023-orbea-orca-m30i.jpg"
+      }
+    }
+    pages_with_matching_images {
+      url: "https://www.freewheeling.ie/road-bikes"
+      page_title: "Road Bikes - Freewheeling"
+      partial_matching_images {
+        url: "https://www.freewheeling.ie/images/my21contendar2_coloraconcrete.jpg?width=480&height=480&format=webp&quality=70&scale=both"
+      }
+    }
+    visually_similar_images {
+      url: "https://api.bikeflip.com/storage/647117/responsive-images/specialized-tarmac-sl7-expert-carbonio-axs-12v___optimized-bike-ad-images_400_266.jpg"
+    }
+    visually_similar_images {
+      url: "https://api.bikeflip.com/storage/646577/responsive-images/specialized-tarmac-sl7-expert-carbonio-axs-12v___optimized-bike-ad-images_400_266.jpg"
+    }
+    visually_similar_images {
+      url: "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3456784741880886375"
+    }
+    visually_similar_images {
+      url: "https://www.bassobikes.pl/images/bikes/diamante-sv/Diamante-SV_Enigma-Black.webp"
+    }
+    visually_similar_images {
+      url: "https://api.bikeflip.com/storage/645637/responsive-images/bmc-team-machine-slr-01-carbonio-axs-12v___optimized-bike-ad-images_400_266.jpg"
+    }
+    visually_similar_images {
+      url: "https://www.head-bike.com/wp-content/uploads/2024/07/I-Speed-3.0_-1024x683.jpg"
+    }
+    visually_similar_images {
+      url: "https://images2.giant-bicycles.com/b_white%2Cc_pad%2Ch_400%2Cq_80%2Cw_600/fpskvr24m1nc01ybbfzh/MY24DefyAdvanced1_ColorACharcoal_MilkyWay.jpg"
+    }
+    visually_similar_images {
+      url: "https://api.bikeflip.com/storage/649418/responsive-images/scott-foil-10-carbonio-di2-11v___optimized-bike-ad-images_400_266.jpg"
+    }
+    visually_similar_images {
+      url: "https://api.bikeflip.com/storage/648684/responsive-images/scott-addict-rc-40-carbonio-di2-12v___optimized-bike-ad-images_400_266.jpg"
+    }
+    visually_similar_images {
+      url: "https://images2.giant-bicycles.com/b_white%2Cc_pad%2Ch_400%2Cq_80%2Cw_600/ld31fwsrpz8cwodp6qzc/MY25DefyAdvancedSL1_ColorAMoonstone.jpg"
+    }
+    best_guess_labels {
+      label: "road bike"
+      language_code: "en"
+    }
+  }
