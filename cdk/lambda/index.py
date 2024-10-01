@@ -32,7 +32,7 @@ def lambda_handler(event, context):
     google_project_name = secret['IMAGE_RECOGNITION_GOOGLE_PROJECT_NAME']
 
     # Initialize the Google Vision client with the API key
-    vision_client = get_google_vision_client(google_api_key_path)
+    vision_client = get_google_vision_client(google_api_key)
 
     # Process the image using the model logic
     most_likely_family_id = process_image(image_data, vision_client)
