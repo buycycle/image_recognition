@@ -15,7 +15,7 @@ class ImageRecognitionStack(core.Stack):
                            auto_delete_objects=True)
         # Create a Lambda function
         lambda_function = _lambda.Function(self, "ImageRecognitionFunction",
-                                           runtime=_lambda.Runtime.PYTHON_3_8,
+                                           runtime=_lambda.Runtime.PYTHON_3_12,
                                            handler="index.lambda_handler",
                                            code=_lambda.Code.from_asset("lambda"),
                                            environment={
