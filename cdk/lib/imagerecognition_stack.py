@@ -1,21 +1,23 @@
 from aws_cdk import (
-    core,
+    Stack,
     aws_s3 as s3,
     aws_lambda as _lambda,
     aws_s3_notifications as s3_notifications,
     aws_apigateway as apigateway,
     aws_secretsmanager as secretsmanager,
+    RemovalPolicy
 )
-class ImageRecognitionStack(core.Stack):
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+from constructs import Construct
+class ImageRecognitionStack(Stack):
+    def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
         # Create an S3 bucket for image uploads
         bucket = s3.Bucket(self, "ImageRecognitionBucket",
-                           removal_policy=core.RemovalPolicy.DESTROY,
+                           removal_policy=RemovalPolicy.DESTROY,
                            auto_delete_objects=True)
         # Create a Lambda function
         lambda_function = _lambda.Function(self, "ImageRecognitionFunction",
-                                           runtime=_lambda.Runtime.PYTHON_3_8,
+                                           runtime=_lambda.Runtime.PYTHON_3_9,  # Use a more recent runtime
                                            handler="index.lambda_handler",
                                            code=_lambda.Code.from_asset("lambda"),
                                            environment={
