@@ -26,7 +26,7 @@ The primary objective of this project is to develop a robust image recognition m
    ```
 2. **Deploy the CDK Stack**
      ```bash
-     cdk deploy
+     cdk deploy --app cdk/bin/app.py
      ```
 ## Usage
 1. **Upload an Image**
