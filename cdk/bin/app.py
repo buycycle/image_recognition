@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 import os
+import sys
+# Add the 'cdk' directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import aws_cdk as cdk
-from imagerecognition.imagerecognition_stack import ImageRecognitionStack
-app = cdk.App()
+from aws_cdk import core
+from lib.imagerecognition_stack import ImageRecognitionStack
+app = core.App()
 ImageRecognitionStack(app, "ImageRecognitionStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
