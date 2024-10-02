@@ -24,14 +24,20 @@ def lambda_handler(event, context):
         # Get the bucket and object key from the S3 event
         bucket = event['Records'][0]['s3']['bucket']['name']
         key = event['Records'][0]['s3']['object']['key']
+        # Log the bucket and key
+        print(f"Bucket: {bucket}, Key: {key}")
         # Get the image from S3
         response = s3_client.get_object(Bucket=bucket, Key=key)
         image_data = response['Body'].read()
+        # Log the image data size
+        print(f"Image data size: {len(image_data)} bytes")
         # Retrieve Google API credentials from Secrets Manager
         secret_name = os.environ['SECRET_NAME']
         secret = get_secret(secret_name)
         google_api_key = secret['IMAGE_RECOGNITION_GOOGLE_API_KEY']
         google_project_name = secret['IMAGE_RECOGNITION_GOOGLE_PROJECT_NAME']
+        # Log the Google API key and project name
+        print(f"Google API Key: {google_api_key}, Project Name: {google_project_name}")
         # Initialize the Google Vision client with the API key
         # vision_client = get_google_vision_client(google_api_key)
         # Process the image using the model logic
