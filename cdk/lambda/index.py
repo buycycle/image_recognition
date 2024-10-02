@@ -47,9 +47,10 @@ def lambda_handler(event, context):
             'body': json.dumps({'most_likely_family_id': "test"})
         }
     except Exception as e:
-        print(f"Error processing request: {e}")
+        error_message = str(e)
+        print(f"Error processing request: {error_message}")
         return {
             'statusCode': 500,
-            'body': json.dumps({'message': 'Internal server error'})
+            'body': json.dumps({'message': 'Internal server error', 'error': error_message})
         }
 
