@@ -24,7 +24,7 @@ class ImageRecognitionStack(Stack):
         )
         # Create a Lambda function
         lambda_function = _lambda.Function(self, "ImageRecognitionFunction",
-                                           runtime=_lambda.Runtime.PYTHON_3_9,  # Use a more recent runtime
+                                           runtime=_lambda.Runtime.PYTHON_3_11,  # Use a more recent runtime
                                            handler="index.lambda_handler",
                                            code=_lambda.Code.from_asset("lambda"),
                                            environment={

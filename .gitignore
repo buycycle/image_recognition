@@ -1,2 +1,6 @@
 .venv/
 cdk.out
+*.pyc
+*.pyo
+lambda_function.zip
+cdk/lambda/lib/
