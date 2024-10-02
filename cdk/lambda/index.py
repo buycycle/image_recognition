@@ -35,10 +35,10 @@ def lambda_handler(event, context):
     vision_client = get_google_vision_client(google_api_key)
 
     # Process the image using the model logic
-    most_likely_family_id = process_image(image_data, vision_client)
+    #most_likely_family_id = process_image(image_data, vision_client)
 
     return {
         'statusCode': 200,
-        'body': json.dumps({'most_likely_family_id': most_likely_family_id})
+        'body': json.dumps({'most_likely_family_id': "test"})
     }
 

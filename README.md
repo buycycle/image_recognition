@@ -24,9 +24,16 @@ The primary objective of this project is to develop a robust image recognition m
    git clone https://github.com/yourusername/bicycle-image-recognition-lambda.git
    cd bicycle-image-recognition-lambda
    ```
-2. **Deploy the CDK Stack**
+2. **Create venv and install dependencies**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate.fish
+   ```
+
+3. **Deploy the CDK Stack**
      ```bash
-     cdk deploy --app cdk/bin/app.py
+     cd cdk
+     cdk deploy --app bin/app.py
      ```
 ## Usage
 1. **Upload an Image**
