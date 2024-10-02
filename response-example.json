@@ -195,8 +195,7 @@ web_detection {
   }
 
 // test_2
-// 84475 SuperSix EVO Hi-MOD 2 2023
-// 126112 SuperSix EVO Hi-MOD 2 2024
+// 92 result? SELECT count(*) FROM bike_templates WHERE name like "%SuperSix EVO Hi-Mod%" LIMIT 100
 web_detection {
   web_entities {
     entity_id: "/m/09rgp"
