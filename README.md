@@ -1,5 +1,9 @@
 # buycycle Image Recognition Model
 Welcome to the buycycle Image Recognition Model project! This repository contains the code and resources for a serverless image recognition model designed to recognize and classify images of bicycles. The project leverages AWS Lambda and Google Vision AI API to detect web entities and filter results based on a certain score threshold. The ultimate goal is to match user-uploaded bicycle images to a predefined set of template IDs using a word matching algorithm.
+
+# to-does
+CI CD github
+docker
 ## Project Overview
 ### Objective
 The primary objective of this project is to develop a robust image recognition model that can accurately identify and classify bicycle images uploaded by users. The model will utilize Google Vision AI's Web Detection feature to extract relevant web entities and match them to a predefined set of template IDs.
@@ -17,7 +21,7 @@ The primary objective of this project is to develop a robust image recognition m
 - An AWS account with access to S3 and Lambda.
 - A Google Cloud account with access to the Vision AI API.
 - AWS CLI and CDK installed on your local machine.
-- Python 3.7 or higher.
+- Python 3.11 or higher.
 ### Installation
 1. **Clone the Repository**
    ```bash
@@ -31,15 +35,17 @@ The primary objective of this project is to develop a robust image recognition m
    ```
 3. **Copy dependencies to lambda**
    ```bash
-   pip install -r cdk/lambda/requirements.txt -t cdk/lambda/lib/
-
-   zip -r9 lambda_function.zip cdk/lambda/lib/
+      cd cdk
+      cd lambda/
+      pip install -r requirements.txt -t .
+      cd cdk/lambda/
+      zip -r9 ../lambda_function.zip .
+      mv cdk/lambda_function.zip .
    ```
 
 3. **Deploy the CDK Stack**
    ```bash
-   cd cdk
-   cdk deploy --app bin/app.py
+   cdk deploy --app cdk/bin/app.py
    ```
 ## Usage
 1. **Upload an Image**
