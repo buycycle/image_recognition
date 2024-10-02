@@ -1,9 +1,10 @@
 FROM public.ecr.aws/lambda/python:3.9
+# Set the working directory
 # Install dependencies
-COPY lambda/requirements.txt .
-RUN pip install -r requirements.txt -t /lambda
+COPY /cdk/lambda/requirements.txt .
+RUN pip install -r requirements.txt -t /cdk/lambda
 # Copy the Lambda function code
-COPY lambda /lambda
+COPY cdk/lambda /lambda
 # Set the working directory
 WORKDIR /lambda
 # Command to run the Lambda function
