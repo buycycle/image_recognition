@@ -1,3 +1,4 @@
+import os
 import json
 import boto3
 import base64
@@ -20,23 +21,18 @@ def lambda_handler(event, context):
     # Get the bucket and object key from the S3 event
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
-
     # Get the image from S3
     response = s3_client.get_object(Bucket=bucket, Key=key)
     image_data = response['Body'].read()
-
     # Retrieve Google API credentials from Secrets Manager
-    secret_name = 'your-secret-name'  # Replace with your secret name
+    secret_name = os.environ['SECRET_NAME']
     secret = get_secret(secret_name)
     google_api_key = secret['IMAGE_RECOGNITION_GOOGLE_API_KEY']
     google_project_name = secret['IMAGE_RECOGNITION_GOOGLE_PROJECT_NAME']
-
     # Initialize the Google Vision client with the API key
-    vision_client = get_google_vision_client(google_api_key)
-
+    #vision_client = get_google_vision_client(google_api_key)
     # Process the image using the model logic
     #most_likely_family_id = process_image(image_data, vision_client)
-
     return {
         'statusCode': 200,
         'body': json.dumps({'most_likely_family_id': "test"})
