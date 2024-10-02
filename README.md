@@ -29,12 +29,18 @@ The primary objective of this project is to develop a robust image recognition m
    python -m venv .venv
    source .venv/bin/activate.fish
    ```
+3. **Copy dependencies to lambda**
+   ```bash
+   pip install -r cdk/lambda/requirements.txt -t cdk/lambda/lib/
+
+   zip -r9 lambda_function.zip cdk/lambda/lib/
+   ```
 
 3. **Deploy the CDK Stack**
-     ```bash
-     cd cdk
-     cdk deploy --app bin/app.py
-     ```
+   ```bash
+   cd cdk
+   cdk deploy --app bin/app.py
+   ```
 ## Usage
 1. **Upload an Image**
    - Use a tool like Postman or curl to upload an image to the API Gateway endpoint.
