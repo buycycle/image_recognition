@@ -26,31 +26,34 @@ def get_secret(secret_name):
         print(f"Error retrieving secret: {e}")
         raise e
 def parse_multipart(event):
+    # Get the content type from headers
     content_type = event['headers'].get('Content-Type') or event['headers'].get('content-type')
     if not content_type:
         raise ValueError("Content-Type header is missing")
-
+    # Decode the body if it's base64 encoded
     body = event['body']
     if event.get('isBase64Encoded', False):
         body = base64.b64decode(body)
     else:
         body = body.encode('utf-8')  # Ensure the body is in bytes
+    # Prepare the environment and headers for FieldStorage
     environ = {'REQUEST_METHOD': 'POST'}
     headers = {'content-type': content_type}
+    # Parse the multipart form data
     fs = cgi.FieldStorage(fp=BytesIO(body), environ=environ, headers=headers)
-
+    # Access the file part
     file_item = fs['file']
     if not file_item.file:
         raise ValueError("File part is missing in the form data")
+    # Return the file content directly
+    return file_item.file.read()
 
-    return file_item.filename, file_item.file.read()
 def lambda_handler(event, context):
     try:
         # Log the incoming event
         print("Received event:")
             # Handle API Gateway multipart/form-data event
-        filename, image_data = parse_multipart(event)
-        print(f"Filename: {filename}")
+        image_data = parse_multipart(event)
         # Log the image data size
         print(f"Image data size: {len(image_data)} bytes")
         # Initialize the Google Vision client
