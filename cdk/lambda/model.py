@@ -36,6 +36,8 @@ def get_google_vision_client():
 
 
 def process_image(image_data, vision_client):
+   if not isinstance(image_data, bytes):
+        raise ValueError("Image data is not in bytes format")
 
    image = vision.Image(content=image_data)
    # Call Google Vision API

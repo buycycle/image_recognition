@@ -47,7 +47,7 @@ def parse_multipart(event):
 def lambda_handler(event, context):
     try:
         # Log the incoming event
-        print("Received event: " + json.dumps(event, indent=2))
+        print("Received event:")
             # Handle API Gateway multipart/form-data event
         filename, image_data = parse_multipart(event)
         print(f"Filename: {filename}")
