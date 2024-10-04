@@ -1,7 +1,15 @@
 import base64
 from google.cloud import vision
-def get_google_vision_client(api_key_path):
-   return vision.ImageAnnotatorClient.from_service_account_json(api_key_path)
+from google.api_core.client_options import ClientOptions
+def get_google_vision_client(api_key):
+    # Set up client options with the API key
+    client_options = ClientOptions(api_key=api_key)
+
+    # Create a client with the API key
+    client = vision.ImageAnnotatorClient(client_options=client_options)
+
+    return client
+
 def process_image(image_data, vision_client):
    # Convert image data to base64
    image_base64 = base64.b64encode(image_data).decode('utf-8')
