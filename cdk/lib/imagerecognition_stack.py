@@ -12,7 +12,7 @@ class ImageRecognitionStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
         # Define the secret name
-        secret_name = "buycycle/ml/imagerecognition"
+        secret_name = "buycycle/ml/imagerecognition/google_service_account"
         # Create an S3 bucket for image uploads
         bucket = s3.Bucket(self, "ImageRecognitionBucket",
                            removal_policy=RemovalPolicy.DESTROY,
@@ -37,7 +37,7 @@ class ImageRecognitionStack(Stack):
         # Create an API Gateway REST API
         api = apigateway.RestApi(self, "ImageRecognitionApi",
                                  rest_api_name="Image Recognition Service",
-                                 description="This service recognizes images.")
+                                 description="This service recognizes bicycle images and returns the most likely n familiy_id.")
         # Create a resource and method for image uploads
         upload_resource = api.root.add_resource("upload")
         upload_integration = apigateway.LambdaIntegration(lambda_function)
