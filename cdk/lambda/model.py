@@ -14,12 +14,9 @@ def process_image(image_data, vision_client):
    # Convert image data to base64
    image_base64 = base64.b64encode(image_data).decode('utf-8')
 
+   image = vision.Image(content=image_data)
    # Call Google Vision API
-   response = vision_client.web_detection({
-       'image': {
-           'content': image_base64
-       }
-   })
+   response = vision_client.web_detection(image=image)
 
    # Process the response
    web_detection = response.web_detection

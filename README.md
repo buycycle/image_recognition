@@ -36,9 +36,9 @@ The primary objective of this project is to develop a robust image recognition m
    ```
 3. **Copy dependencies to lambda and zip for cdk**
    ```bash
-   mkdir cdk/lambda/lib
-   pip install -r requirements.txt -t cdk/lambda/lib/                       (image)
-   zip -r9 lambda_function.zip cdk/lambda/
+   pip install -r requirements.txt -t cdk/lambda/
+   cd cdk/lambda/
+   zip -r9 ../../lambda_function.zip .
    ```
 
 3. **Deploy the CDK Stack**
@@ -49,7 +49,7 @@ The primary objective of this project is to develop a robust image recognition m
 1. **Upload an Image**
    - Use a tool like Postman or curl to upload an image to the API Gateway endpoint.
      ```bash
-     curl -X POST -F "file=@path/to/your/image.jpg" https://<api-id>.execute-api.<region>.amazonaws.com/prod/upload
+     curl -v -X POST -F "file=@path/to/your/image.jpg" https://<api-id>.execute-api.<region>.amazonaws.com/prod/upload
      ```
 2. **Trigger Lambda Function**
    - The API Gateway will trigger the Lambda function, which will process the image and return the most likely `template_id`.

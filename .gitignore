@@ -3,4 +3,7 @@ cdk.out
 *.pyc
 *.pyo
 lambda_function.zip
-cdk/lambda/lib/
+cdk/lambda/
+!cdk/lambda/model.py
+!cdk/lambda/index.py
+!cdk/lambda/requirements.txt

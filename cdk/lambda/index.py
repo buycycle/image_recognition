@@ -62,11 +62,6 @@ def lambda_handler(event, context):
         # Log the image data size
         print(f"Image data size: {len(image_data)} bytes")
 
-        # Base64 encode the image data
-        image_base64 = base64.b64encode(image_data).decode('utf-8')
-
-        # Log the base64 encoded image data size
-        print(f"Base64 encoded image data size: {len(image_base64)} bytes")
 
         # Retrieve Google API credentials from Secrets Manager
         secret_name = os.environ['SECRET_NAME']
@@ -81,7 +76,7 @@ def lambda_handler(event, context):
         vision_client = get_google_vision_client(google_api_key)
 
         # Process the image using the model logic
-        most_likely_family_id = process_image(image_base64, vision_client)
+        most_likely_family_id = process_image(image_data, vision_client)
 
         return {
             'statusCode': 200,
