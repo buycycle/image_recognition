@@ -36,8 +36,6 @@ def get_google_vision_client():
 
 
 def process_image(image_data, vision_client):
-   # Convert image data to base64
-   image_base64 = base64.b64encode(image_data).decode('utf-8')
 
    image = vision.Image(content=image_data)
    # Call Google Vision API

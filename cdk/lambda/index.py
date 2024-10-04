@@ -48,19 +48,9 @@ def lambda_handler(event, context):
     try:
         # Log the incoming event
         print("Received event: " + json.dumps(event, indent=2))
-        if 'Records' in event:
-            # Handle S3 event
-            bucket = event['Records'][0]['s3']['bucket']['name']
-            key = event['Records'][0]['s3']['object']['key']
-            # Log the bucket and key
-            print(f"Bucket: {bucket}, Key: {key}")
-            # Get the image from S3
-            response = s3_client.get_object(Bucket=bucket, Key=key)
-            image_data = response['Body'].read()
-        else:
             # Handle API Gateway multipart/form-data event
-            filename, image_data = parse_multipart(event)
-            print(f"Filename: {filename}")
+        filename, image_data = parse_multipart(event)
+        print(f"Filename: {filename}")
         # Log the image data size
         print(f"Image data size: {len(image_data)} bytes")
         # Initialize the Google Vision client
