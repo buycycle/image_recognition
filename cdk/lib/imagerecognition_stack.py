@@ -23,39 +23,26 @@ class ImageRecognitionStack(Stack):
         # Create an SNS topic for image processing results
         topic = sns.Topic(self, "ImageProcessingResultsTopic",
                           display_name="Image Processing Results")
-        # Create a Lambda function for uploading images to S3
-        upload_lambda = _lambda.Function(self, "UploadFunction",
-                                         runtime=_lambda.Runtime.PYTHON_3_11,
-                                         handler="index.upload_handler",  # Specify the upload handler
-                                         timeout=Duration.seconds(30),
-                                         code=_lambda.Code.from_asset("lambda_function.zip"),
-                                         environment={
-                                             "BUCKET_NAME": bucket.bucket_name,
-                                             "SNS_TOPIC_ARN": topic.topic_arn,
-                                         })
-        # Grant the upload Lambda function write access to the S3 bucket
-        bucket.grant_put(upload_lambda)
-        # Create a Lambda function for image recognition
-        recognition_lambda = _lambda.Function(self, "ImageRecognitionFunction",
-                                              runtime=_lambda.Runtime.PYTHON_3_11,
-                                              handler="index.recognition_handler",  # Specify the recognition handler
-                                              timeout=Duration.seconds(30),
-                                              code=_lambda.Code.from_asset("lambda_function.zip"),
-                                              environment={
-                                                  "BUCKET_NAME": bucket.bucket_name,
-                                                  "SECRET_NAME": secret_name,
-                                                  "SNS_TOPIC_ARN": topic.topic_arn,
-                                              })
-        # Grant the recognition Lambda function read access to the S3 bucket
-        bucket.grant_read(recognition_lambda)
-        # Add S3 event notification to trigger the recognition Lambda function on object creation
+        # Create a Lambda function
+        lambda_function = _lambda.Function(self, "ImageRecognitionFunction",
+                                           runtime=_lambda.Runtime.PYTHON_3_11,  # Use a more recent runtime
+                                           handler="index.lambda_handler",
+                                           timeout=Duration.seconds(30),  # Increase timeout to 30 seconds
+                                           code=_lambda.Code.from_asset("lambda_function.zip"),
+                                           environment={
+                                               "BUCKET_NAME": bucket.bucket_name,
+                                               "SECRET_NAME": secret_name,
+                                               "SNS_TOPIC_ARN": topic.topic_arn,
+                                           })
+        # Grant the Lambda function read access to the S3 bucket
+        bucket.grant_read(lambda_function)
+        # Add S3 event notification to trigger the Lambda function on object creation
         bucket.add_event_notification(s3.EventType.OBJECT_CREATED,
-                                      s3_notifications.LambdaDestination(recognition_lambda))
-        # Grant the recognition Lambda function access to the secret
+                                      s3_notifications.LambdaDestination(lambda_function))
+        # Grant the Lambda function access to the secret
         secret = secretsmanager.Secret.from_secret_name_v2(self, 'GoogleApiSecret', secret_name)
-        secret.grant_read(recognition_lambda)
-        # Grant the recognition Lambda function permission to publish to the SNS topic
-        topic.grant_publish(recognition_lambda)
-        # Optionally, subscribe an email to the SNS topic
-        topic.add_subscription(sns_subscriptions.EmailSubscription("sebastian@buycycle.com"))
-
+        secret.grant_read(lambda_function)
+        # Grant the Lambda function permission to publish to the SNS topic
+        topic.grant_publish(lambda_function)
+        http_endpoint = "https://your-java-app-endpoint.com/sns-listener"
+        topic.add_subscription(sns_subscriptions.UrlSubscription(http_endpoint))
