@@ -1,4 +1,7 @@
 import os
+import sys
+# Add the 'lib' directory to the Python path
+sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 import json
 import boto3
 from google.cloud import vision
@@ -41,7 +44,7 @@ def lambda_handler(event, context):
             print(f"Most likely family ID: {most_likely_family_id}")
             # Construct the message including the object key
             message = {
-                'bucket': bucket_name,
+                'bucket':bucket_name,
                 'key': object_key,
                 'family_id': most_likely_family_id
             }

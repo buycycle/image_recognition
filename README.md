@@ -15,7 +15,7 @@ The primary objective of this project is to develop a robust image recognition m
 5. **Word Matching Algorithm**: A custom word matching algorithm is used to match the filtered web entities to a predefined set of template IDs.
 6. **Result Return**: The top n similar matches are returned directly from the Lambda function.
 ### Schematic
-[View Schematic](https://excalidraw.com/#json=QBDc-3D20PmzMPd2u3rxQ,x2UBzAV-oKmlsPWoYLl3dQ)
+[View Schematic](https://excalidraw.com/#json=Jj-Up3939A3IqnVo_m134,gga0AOzxOuT4NhSy-QToRg)
 ## Getting Started
 ### Prerequisites
 - An AWS account with access to S3 and Lambda.
@@ -34,11 +34,12 @@ The primary objective of this project is to develop a robust image recognition m
    source .venv/bin/activate.fish
    pip install cdk/requirements_cdk.txt
    ```
-3. **Copy dependencies to lambda and zip for cdk**
+3. **Install dependencies to lambda and zip for cdk**
    ```bash
-   pip install -r requirements.txt -t cdk/lambda/
-   cd cdk/lambda/
-   zip -r9 ../../lambda_function.zip .
+   pip install -r requirements.txt -t cdk/lambda/lib/
+
+   find cdk/lambda -maxdepth 1 -type f -exec zip -r9 lambda_function.zip {} +
+   (cd cdk/lambda && zip -r ../../lambda_function.zip lib)
    ```
 
 3. **Deploy the CDK Stack**
@@ -46,15 +47,8 @@ The primary objective of this project is to develop a robust image recognition m
    cdk deploy --app cdk/bin/app.py
    ```
 ## Usage
-1. **Upload an Image**
-   - Use a tool like Postman or curl to upload an image to the API Gateway endpoint.
-     ```bash
-     curl -v -X POST -F "file=@path/to/your/image.jpg" https://<api-id>.execute-api.<region>.amazonaws.com/prod/upload
-     ```
-2. **Trigger Lambda Function**
-   - The API Gateway will trigger the Lambda function, which will process the image and return the most likely `template_id`.
-3. **View Results**
-   - The response from the Lambda function will be returned directly to the client.
+   The image recognition lambda function is triggered by an upload to the S3 bucket.
+   The results are published with SNS.
 ## How It Works
 ### AWS Lambda Integration
 The Lambda function is triggered by an S3 event whenever a new image is uploaded to the designated S3 bucket. The function reads the image from S3 and sends it to Google Vision AI's Web Detection API.
@@ -65,7 +59,7 @@ The returned web entities are filtered based on a predefined score threshold to 
 ### Word Matching Algorithm
 A custom word matching algorithm is used to match the filtered web entities to a predefined set of template IDs. The algorithm calculates the similarity between the web entity descriptions and the template IDs to determine the most likely match.
 ### Result Return
-The most likely match is returned directly from the Lambda function.
+The most likely match are published over SNS.
 ## Contributing
 We welcome contributions to this project! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
 ## License

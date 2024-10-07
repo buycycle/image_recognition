@@ -45,4 +45,4 @@ class ImageRecognitionStack(Stack):
         # Grant the Lambda function permission to publish to the SNS topic
         topic.grant_publish(lambda_function)
         http_endpoint = "https://your-java-app-endpoint.com/sns-listener"
-        topic.add_subscription(sns_subscriptions.UrlSubscription(http_endpoint))
+        #topic.add_subscription(sns_subscriptions.UrlSubscription(http_endpoint))
