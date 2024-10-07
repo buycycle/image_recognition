@@ -15,7 +15,7 @@ The primary objective of this project is to develop a robust image recognition m
 5. **Word Matching Algorithm**: A custom word matching algorithm is used to match the filtered web entities to a predefined set of template IDs.
 6. **Result Return**: The top n similar matches are returned directly from the Lambda function.
 ### Schematic
-[View Schematic](https://excalidraw.com/#json=_mKcmwEdqvZDs1Urlapc7,crsQy1z9jc7mZNr8755P3g)
+[View Schematic](https://excalidraw.com/#json=QBDc-3D20PmzMPd2u3rxQ,x2UBzAV-oKmlsPWoYLl3dQ)
 ## Getting Started
 ### Prerequisites
 - An AWS account with access to S3 and Lambda.
