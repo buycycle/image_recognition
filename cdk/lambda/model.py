@@ -42,7 +42,6 @@ def process_image(image_data, vision_client):
    image = vision.Image(content=image_data)
    # Call Google Vision API
    response = vision_client.web_detection(image=image)
-   print(response)
 
    # Process the response
    web_detection = response.web_detection
