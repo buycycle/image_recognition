@@ -1,5 +1,6 @@
 from aws_cdk import (
     Stack,
+    Duration,
     aws_s3 as s3,
     aws_lambda as _lambda,
     aws_s3_notifications as s3_notifications,
@@ -11,33 +12,42 @@ from constructs import Construct
 class ImageRecognitionStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
+
         # Define the secret name
         secret_name = "buycycle/ml/imagerecognition/google_service_account"
+
         # Create an S3 bucket for image uploads
         bucket = s3.Bucket(self, "ImageRecognitionBucket",
                            removal_policy=RemovalPolicy.DESTROY,
                            auto_delete_objects=True)
+
         # Create a Lambda function
         lambda_function = _lambda.Function(self, "ImageRecognitionFunction",
                                            runtime=_lambda.Runtime.PYTHON_3_11,  # Use a more recent runtime
                                            handler="index.lambda_handler",
+                                           timeout=Duration.seconds(30),  # Increase timeout to 30 seconds
                                            code=_lambda.Code.from_asset("lambda_function.zip"),
                                            environment={
                                                "BUCKET_NAME": bucket.bucket_name,
                                                "SECRET_NAME": secret_name,
                                            })
+
         # Grant the Lambda function read access to the S3 bucket
         bucket.grant_read(lambda_function)
-        # Add S3 event notification to trigger the Lambda function
+
+        # Add S3 event notification to trigger the Lambda function on object creation
         bucket.add_event_notification(s3.EventType.OBJECT_CREATED,
                                       s3_notifications.LambdaDestination(lambda_function))
+
         # Grant the Lambda function access to the secret
         secret = secretsmanager.Secret.from_secret_name_v2(self, 'GoogleApiSecret', secret_name)
         secret.grant_read(lambda_function)
+
         # Create an API Gateway REST API
         api = apigateway.RestApi(self, "ImageRecognitionApi",
                                  rest_api_name="Image Recognition Service",
-                                 description="This service recognizes bicycle images and returns the most likely n familiy_id.")
+                                 description="This service recognizes bicycle images and returns the most likely family_id.")
+
         # Create a resource and method for image uploads
         upload_resource = api.root.add_resource("upload")
         upload_integration = apigateway.LambdaIntegration(lambda_function)
