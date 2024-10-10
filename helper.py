@@ -1,18 +1,18 @@
-import io
 import os
-import time
 import re
 import spacy
 import ast
 import pandas as pd
-from google.cloud import vision
-from driver import general_words
+import requests
+from collections import Counter
 
 from buycycle.data import sql_db_read
 
-# Step 1: Preparing necessary resources
-# Helper function to load SpaCy models
+
 def load_spacy_model(model_name):
+    """
+    load spacy models if it doesn't exist
+    """
     try:
         nlp = spacy.load(model_name)
         print(f"{model_name} is already loaded.")
@@ -23,57 +23,15 @@ def load_spacy_model(model_name):
         print(f"{model_name} has been downloaded and loaded.")
     return nlp
 
-# Step 2: Define functions
-# Define the text preprocsiing steps, which will be used for both templates_df and response 
-def preprocess_text(text, nlp_de, nlp_en, general_words, stop_words):
-    if not isinstance(text, str):
-        text = str(text)
-    text = re.sub(r'[^\w\s.]', ' ', text)  # Remove special characters except periods
+
+def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, stop_words):
+    """
+    Load or download df_templates, 
+    which is based on table bike_templates and complement with extra columns, 
+    and will be used in calculate similarity
     
-    # Process text using SpaCy for German
-    doc_de = nlp_de(text)
-    tokens_de = [token.lemma_ for token in doc_de]
-
-    text_de = ' '.join(tokens_de)
-    text_en = text_de.lower()
-
-    # Process text using SpaCy for English
-    doc_en = nlp_en(text_en)
-    tokens_en = [token.lemma_ for token in doc_en]
-
-    # Convert tokens to a single string for further processing with the German model
-    tokens = [word for word in tokens_en if word not in stop_words and word not in general_words]
-
-    return set(tokens)
-
-# combine infos from response and retuen a string
-def extract_response_info(response):
-    response_text = ""
-    # Concatenate descriptions from web entities
-    for web_entity in response.web_detection.web_entities:
-        if web_entity.description:
-            response_text += " " + web_entity.description
-
-    # Concatenate page titles from pages with matching images
-    for page in response.web_detection.pages_with_matching_images:
-        if page.page_title:
-            response_text += " " + page.page_title
-
-    # Concatenate best guess labels
-    for label in response.web_detection.best_guess_labels:
-        if label.label:
-            response_text += " " + label.label
-    return response_text
-
-# Define Jaccard Similarity
-def jaccard_similarity(set1, set2):
-    intersection = len(set1.intersection(set2))
-    union = len(set1.union(set2))
-    return intersection / union if union != 0 else 0
-
-
-# Step 3: Preparing bike templates df, combine name ,slug and brand values and preprocess text
-def load_df_templates(csv_file_path, templates_query):
+    Returns: processed templates dataframe 
+    """
     if os.path.exists(csv_file_path):
         df_templates = pd.read_csv(csv_file_path)
         print("Preprocessed dataframe loaded from CSV file.")
@@ -88,31 +46,98 @@ def load_df_templates(csv_file_path, templates_query):
                 index_col="template_id",
             )
         df_templates.reset_index(inplace=True)
-        df_templates['combined'] = df_templates['name'] + " " + df_templates['slug']+ " " + df_templates['brand']
-        df_templates['combined_tokens'] = df_templates['combined'].apply(lambda text: preprocess_text(text, nlp_de, nlp_en, general_words, stop_words))
+        # combine all relevant columns
+        df_templates['combined'] = df_templates['name'] + " " + df_templates['slug']+ " " + df_templates['brand']+ " " +df_templates['family']
+        # process text
+        df_templates['combined_tokens'] = df_templates['combined'].apply(lambda text: preprocess_text(text, nlp_en, general_words, stop_words)[0])
+
         df_templates.to_csv(csv_file_path, index=False)
         print("DataFrame saved to CSV file.")
     return df_templates
 
 
-def get_5_matches(google_client, source_type, image_source, df_templates, nlp_de, nlp_en, general_words, stop_words):
-    if source_type == "local":
-        with io.open(image_source, 'rb') as image_file:
-            content = image_file.read()
-        image = vision.Image(content=content)
-    elif source_type == "web":
-        image = vision.Image()
-        image.source.image_uri = image_source
-    response = google_client.web_detection(image=image)
-    response_text = extract_response_info(response)
-    vision_api_tokens = preprocess_text(response_text, nlp_de, nlp_en, general_words, stop_words)
-    df_templates['similarity'] = df_templates['combined_tokens'].apply(lambda tokens: jaccard_similarity(tokens, vision_api_tokens))
+# Define the text preprocsiing steps, which will be used for both templates_df and response 
+def preprocess_text(text, nlp_en, general_words, stop_words):
+    """
+    Process the text before calculating the similarity
+    Returns: 
+        set(tokens), applied for templates_df preprocessing
+        set(filtered_tokens), applied for response preprocessing
+    """
+    if not isinstance(text, str):
+        text = str(text)
+    text = text.lower()
+    text = text.strip()
+    text = re.sub(r'[^\w\s.]', ' ', text)  # Remove special characters except periods
+    
+    # Process text using Spacy for English
+    doc = nlp_en(text)
+    tokens = [token.lemma_ for token in doc]
 
-    top_5_matches = df_templates.nlargest(5, 'similarity')[["template_id", "brand", "name", "slug", "similarity"]]
+    # remove empty word, stop words and self-defined general words
+    tokens = [word for word in tokens if word not in stop_words and word not in general_words and word.strip()]
 
-    return response, response_text, vision_api_tokens, top_5_matches
+    # further process for request string
+    # take 10 results, filter the words appear more then 3 times 
+    token_counts = Counter(tokens)
+    filtered_tokens = [word for word in tokens if token_counts[word] > 3]
+
+    return set(tokens), set(filtered_tokens)
 
 
+def jaccard_similarity(set1, set2):
+    """
+    Calculate the similarity according to how many words appear in both sets
+    Returns: similarity score
+    """
+    intersection = len(set1.intersection(set2))
+    union = len(set1.union(set2))
+    return intersection / union if union != 0 else 0
 
 
+def extract_scarping_info(url, params, num):
+    """
+    take the response from Scrapingdog, and extract the titles from the response
+    Params:
+        response: the response directly from Scrapingdog api
+        num: the amount of titles to extract
+    Returns:
+        response_text: string of combined titles
+    """
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        response_json = response.json()
+        titles = [result["title"] for result in response_json["lens_results"][:num]]
+        response_text = " ".join(titles)
+        return response, response_text
+
+    print(f"Request for url {params['url']} failed with status code: {response.status_code}")
+    return response, None
+
+def get_matches_scraping(url, params, df_templates, num, nlp_en, general_words, stop_words):
+    """
+    Workflow for whole process
+    Returns: results of every phase, can be used for saving file and checking the result
+    """
+    # extract required titles and return a string
+    response, response_text = extract_scarping_info(url, params, num)
+    # preprocess text and tokenize
+    response_tokens = preprocess_text(response_text, nlp_en, general_words, stop_words)[1]
+    # calculate similarity and get the top matches
+    if response_tokens:
+        df_templates['similarity'] = df_templates['combined_tokens'].apply(lambda tokens: jaccard_similarity(tokens, response_tokens))
+        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "brand", "name", "slug","family", "similarity"]]
+
+        return response, response_text, response_tokens, top_matches
+    
+    print("No result found.")
+    return None, None, None, None
+
+        
+    
+
+    
+    
+
+    
 

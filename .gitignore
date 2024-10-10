@@ -5,4 +5,5 @@ test/
 # Ignore macOS system files
 .DS_Store
 
+test.py
 *.ipynb
