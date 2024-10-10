@@ -14,13 +14,19 @@ df_templates = load_df_templates(processed_templates_path, templates_query, nlp_
 # Read the API key from config.ini
 config = configparser.ConfigParser()
 config.read('config/config.ini')
-# https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/1076260/824aa3c6-74f7-43fe-b004-4c4e29f65ac5.webp
 
 # get the image 
 aws_url = "https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/"
 file_url = "1076247/6adf8b65-35fc-4da4-b6b2-aa494383bd2b.webp"
 image_url = f"{aws_url}{file_url}"
-# image_url = "https://www.ollmetzer.com/wp-content/uploads/2022/10/bike_cube_sl_road_race-1.jpg"
+
+# Check first is the image_url valid
+try:
+    response = requests.head(image_url)
+    if response.status_code != 200:
+        raise Exception(f"URL {image_url} is not accessible. Ending process.")
+except requests.RequestException as e:
+    raise Exception(f"An error occurred while trying to access {image_url}: {e}")
 
 # setup for scrapingdog api
 api_key = config['Scrapingdog']['api_key']

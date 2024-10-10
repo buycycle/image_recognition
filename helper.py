@@ -126,7 +126,7 @@ def get_matches_scraping(url, params, df_templates, num, nlp_en, general_words, 
     # calculate similarity and get the top matches
     if response_tokens:
         df_templates['similarity'] = df_templates['combined_tokens'].apply(lambda tokens: jaccard_similarity(tokens, response_tokens))
-        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "brand", "name", "slug","family", "similarity"]]
+        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "brand", "name", "slug", "family_id", "similarity"]]
 
         return response, response_text, response_tokens, top_matches
     
