@@ -5,31 +5,30 @@ from buycycle.data import sql_db_read
 from helper import load_spacy_model, load_df_templates, jaccard_similarity
 from driver import templates_query, processed_templates_path, general_words
 
-# Load Spacy models for English 
-nlp_en = load_spacy_model('en_core_web_sm')
-stop_words = nlp_en.Defaults.stop_words
-
-# Load df_templates for similarity calculation
-df_templates = load_df_templates(processed_templates_path, templates_query, nlp_en, general_words, stop_words)
 
 test_data_query = """
-SELECT 
-    bf.bike_id, 
-    b.bike_template_id AS template_id, 
-    bt.name AS template_name, 
-    bt.family_id AS family_id, 
+SELECT
+    bf.bike_id,
+    b.bike_template_id AS template_id,
+    bt.name AS template_name,
+    bt.family_id AS family_id,
+    b.family_model_id AS family_model_id,
+    bfm.name AS model,
     bf.file_name
-FROM 
+FROM
     bike_files bf
-LEFT JOIN 
+LEFT JOIN
     bikes b ON bf.bike_id = b.id
-LEFT JOIN 
+LEFT JOIN
     bike_templates bt ON b.bike_template_id = bt.id
+LEFT JOIN
+    family_models bfm ON b.family_model_id = bfm.id
 WHERE bf.sort_order = 0
+AND b.price >= 2000
 AND b.bike_template_id != 79204
-AND b.created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)
+AND DATE(b.created_at) = '2024-10-10'
 ORDER BY b.created_at DESC
-LIMIT 5;
+LIMIT 10;
 """
 
 test_file_path = "data/df_text.csv"
@@ -61,7 +60,7 @@ def load_test_file(test_file_path):
         except requests.RequestException as e:
             print(f"An error occurred while trying to access {image_url}: {e}. Deleting row {index}.")
             invalid_rows.append(index)
-        
+
     # Drop invalid rows
     df_test.drop(invalid_rows, inplace=True, errors='ignore')
     df_test.reset_index(drop=True, inplace=True)

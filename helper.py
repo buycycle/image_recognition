@@ -26,11 +26,11 @@ def load_spacy_model(model_name):
 
 def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, stop_words):
     """
-    Load or download df_templates, 
-    which is based on table bike_templates and complement with extra columns, 
+    Load or download df_templates,
+    which is based on table bike_templates and complement with extra columns,
     and will be used in calculate similarity
-    
-    Returns: processed templates dataframe 
+
+    Returns: processed templates dataframe
     """
     if os.path.exists(csv_file_path):
         df_templates = pd.read_csv(csv_file_path)
@@ -47,7 +47,8 @@ def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, sto
             )
         df_templates.reset_index(inplace=True)
         # combine all relevant columns
-        df_templates['combined'] = df_templates['name'] + " " + df_templates['slug']+ " " + df_templates['brand']+ " " +df_templates['family']
+        df_templates['combined'] = df_templates['name'] + " " + df_templates['slug']+ " " + df_templates['brand']+ " " +df_templates['family']+ " " +df_templates['model']
+
         # process text
         df_templates['combined_tokens'] = df_templates['combined'].apply(lambda text: preprocess_text(text, nlp_en, general_words, stop_words)[0])
 
@@ -56,11 +57,11 @@ def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, sto
     return df_templates
 
 
-# Define the text preprocsiing steps, which will be used for both templates_df and response 
+# Define the text preprocsiing steps, which will be used for both templates_df and response
 def preprocess_text(text, nlp_en, general_words, stop_words):
     """
     Process the text before calculating the similarity
-    Returns: 
+    Returns:
         set(tokens), applied for templates_df preprocessing
         set(filtered_tokens), applied for response preprocessing
     """
@@ -69,7 +70,7 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
     text = text.lower()
     text = text.strip()
     text = re.sub(r'[^\w\s.]', ' ', text)  # Remove special characters except periods
-    
+
     # Process text using Spacy for English
     doc = nlp_en(text)
     tokens = [token.lemma_ for token in doc]
@@ -78,12 +79,26 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
     tokens = [word for word in tokens if word not in stop_words and word not in general_words and word.strip()]
 
     # further process for request string
-    # take 10 results, filter the words appear more then 3 times 
+    # take 10 results, filter the words appear more then 3 times
     token_counts = Counter(tokens)
     filtered_tokens = [word for word in tokens if token_counts[word] > 3]
 
     return set(tokens), set(filtered_tokens)
 
+def preprocess_text(text, nlp_en, general_words, stop_words):
+    """
+    Process the text to extract a set of words, including years.
+    Returns:
+        set(tokens)
+    """
+    if not isinstance(text, str):
+        text = str(text)
+    text = text.lower()
+    text = text.strip()
+    text = re.sub(r'[^\w\s]', ' ', text)  # Remove special characters
+    # Split the text into words
+    tokens = text.split()
+    return set(tokens), set(tokens)
 
 def jaccard_similarity(set1, set2):
     """
@@ -126,18 +141,9 @@ def get_matches_scraping(url, params, df_templates, num, nlp_en, general_words, 
     # calculate similarity and get the top matches
     if response_tokens:
         df_templates['similarity'] = df_templates['combined_tokens'].apply(lambda tokens: jaccard_similarity(tokens, response_tokens))
-        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "brand", "name", "slug", "family_id", "similarity"]]
+        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "family_id", "family_model_id", "brand", "name",  "model", "similarity"]]
 
         return response, response_text, response_tokens, top_matches
-    
+
     print("No result found.")
     return None, None, None, None
-
-        
-    
-
-    
-    
-
-    
-
