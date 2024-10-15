@@ -16,8 +16,10 @@ config = configparser.ConfigParser()
 config.read('config/config.ini')
 
 # get the image 
+# bike_id,template_id,template_name,family_id,family,family_model_id,family_model,file_name
+# 420497,27415, Agree GTC SL 2014,727.0,agree,11246,Agree GTC SL,420497/f9a36380-d6be-4da9-9413-aa1f0a93d35a.webp
 aws_url = "https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/"
-file_url = "1076247/6adf8b65-35fc-4da4-b6b2-aa494383bd2b.webp"
+file_url = "420497/f9a36380-d6be-4da9-9413-aa1f0a93d35a.webp"
 image_url = f"{aws_url}{file_url}"
 
 # Check first is the image_url valid

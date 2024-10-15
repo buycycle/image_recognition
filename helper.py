@@ -47,7 +47,7 @@ def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, sto
             )
         df_templates.reset_index(inplace=True)
         # combine all relevant columns
-        df_templates['combined'] = df_templates['name'] + " " + df_templates['slug']+ " " + df_templates['brand']+ " " +df_templates['family']
+        df_templates['combined'] = df_templates['brand']+ " " +df_templates['family_model']
         # process text
         df_templates['combined_tokens'] = df_templates['combined'].apply(lambda text: preprocess_text(text, nlp_en, general_words, stop_words)[0])
 
@@ -75,7 +75,7 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
     tokens = [token.lemma_ for token in doc]
 
     # remove empty word, stop words and self-defined general words
-    tokens = [word for word in tokens if word not in stop_words and word not in general_words and word.strip()]
+    tokens = [word for word in tokens if word not in stop_words and word not in general_words and word.strip() and word != "."]
 
     # further process for request string
     # take 10 results, filter the words appear more then 3 times 
@@ -126,15 +126,17 @@ def get_matches_scraping(url, params, df_templates, num, nlp_en, general_words, 
     # calculate similarity and get the top matches
     if response_tokens:
         df_templates['similarity'] = df_templates['combined_tokens'].apply(lambda tokens: jaccard_similarity(tokens, response_tokens))
-        top_matches = df_templates.nlargest(num, 'similarity')[["template_id", "brand", "name", "slug", "family_id", "similarity"]]
+        top_matches = df_templates.nlargest(num, 'similarity')
 
         return response, response_text, response_tokens, top_matches
     
     print("No result found.")
-    return None, None, None, None
+    return response, None, None, None
+
+
 
         
-    
+
 
     
     
