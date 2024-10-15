@@ -1,3 +1,4 @@
+import datetime
 import json
 import requests
 import configparser
@@ -16,11 +17,7 @@ config = configparser.ConfigParser()
 config.read('config/config.ini')
 
 # get the image 
-# bike_id,template_id,template_name,family_id,family,family_model_id,family_model,file_name
-# 420497,27415, Agree GTC SL 2014,727.0,agree,11246,Agree GTC SL,420497/f9a36380-d6be-4da9-9413-aa1f0a93d35a.webp
-aws_url = "https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/"
-file_url = "420497/f9a36380-d6be-4da9-9413-aa1f0a93d35a.webp"
-image_url = f"{aws_url}{file_url}"
+image_url = "https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/420497/f9a36380-d6be-4da9-9413-aa1f0a93d35a.webp"
 
 # Check first is the image_url valid
 try:
@@ -39,23 +36,29 @@ params = {
 }
 
 # get the top similarity matches
-response, response_text, response_tokens, matches_df = get_matches_scraping(url, params, df_templates, 5, nlp_en, general_words, stop_words)
+response, response_text, response_tokens, matches_df = get_matches_scraping(url, params, df_templates, 25, nlp_en, general_words, stop_words) 
 print(matches_df.to_string())
 
 
 # optional, saving result to the txt file
-folder_name = file_url.split('/')[0]
-result_file_path = f"data/result-{folder_name}.txt"
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+result_file_path = f"data/result-{timestamp}.txt"
 with open(result_file_path, 'w') as file:
     file.write(f"--- Result ---\n")
     file.write(f"Image url: {image_url}\n")
-    file.write(f"Top 5 matches: {matches_df.to_string()}\n")
-    # Write the JSON response
-    file.write("Response ->\n")
-    file.write(json.dumps(response.json(), indent=4))
-    file.write("\n")
-    file.write(f"Extracted text: {response_text}\n")
-    file.write(f"Preprocessed text: {response_tokens}\n")
+    if matches_df is not None:
+        file.write("Top 5 matches:\n")
+        file.write(matches_df.to_string(index=False))
+        file.write("\n\n")
+    else: 
+        file.write("No matches found.\n")
+    file.write(f"Preprocessed text: {response_tokens}\n\n") 
+    file.write(f"Extracted text: {response_text}\n\n")
+    file.write(f"Complete response: {response}\n")
+    if response.status_code == 200:
+        json_response = response.json()
+        formatted_json = json.dumps(json_response, indent=4)
+        file.write(f"Response -> {formatted_json}") 
     file.write("\n")
 print("Result saved!")
 

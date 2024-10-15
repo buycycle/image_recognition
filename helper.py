@@ -84,20 +84,6 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
 
     return set(tokens), set(filtered_tokens)
 
-def preprocess_text(text, nlp_en, general_words, stop_words):
-    """
-    Process the text to extract a set of words, including years.
-    Returns:
-        set(tokens)
-    """
-    if not isinstance(text, str):
-        text = str(text)
-    text = text.lower()
-    text = text.strip()
-    text = re.sub(r'[^\w\s]', ' ', text)  # Remove special characters
-    # Split the text into words
-    tokens = text.split()
-    return set(tokens), set(tokens)
 
 def jaccard_similarity(set1, set2):
     """

@@ -32,7 +32,7 @@ api_key = config['Scrapingdog']['api_key']
 url = "https://api.scrapingdog.com/google_lens"
 aws_url = "https://buycycle-prod.s3.eu-central-1.amazonaws.com/images/770/"
 
-def save_result(result_file_path, row, response, response_text, response_tokens, matches_df, most_common_family_id, top_3_family_model_ids):
+def save_result(result_file_path, row, response, response_text, response_tokens, matches_df, most_common_family_id, ordered_family_model_ids):
     """
     Write the results of process to txt file for later check
     """
@@ -42,7 +42,7 @@ def save_result(result_file_path, row, response, response_text, response_tokens,
         file.write(f"Brand: {row["brand_id"]} {row["brand"]}\n")
         file.write(f"Tmplate: {row["template_id"]} {row["template_name"]}\n")
         file.write(f"Family: {row["family_id"]} {row["family"]} -> Return: {most_common_family_id}\n")
-        file.write(f"Family model: {row["family_model_id"]} {row["family_model"]} -> Return: {top_3_family_model_ids}\n")
+        file.write(f"Family model: {row["family_model_id"]} {row["family_model"]} -> Return: {ordered_family_model_ids}\n")
         if matches_df is not None:
             file.write("Top 5 matches:\n")
             file.write(matches_df.to_string(index=False))
@@ -74,11 +74,13 @@ def process_row(row):
         # Handle the case where no matches are found
         match_tids = []
         most_common_family_id = None
-        top_3_family_model_ids = None
+        ordered_family_model_ids = []
         template_check = False
         family_check = False
         family_model_check = False
-        top_family_models_check = False
+        top_3_family_models_check = False
+        top_5_family_models_check = False
+        top_10_family_models_check = False
     else:
         match_tids = matches_df['template_id'].tolist()
         match_fids = matches_df['family_id'].tolist()
@@ -89,36 +91,42 @@ def process_row(row):
 
         # check family_id and family_model_id
         most_common_family_id = Counter(match_fids).most_common(1)[0][0]
-        top_3_family_model_ids = [item[0] for item in Counter(match_fmids).most_common(3)]
+        ordered_family_model_ids = [item[0] for item in Counter(match_fmids).most_common()]
 
         family_check = most_common_family_id == row["family_id"]
-        family_model_check = top_3_family_model_ids[0] == row["family_model_id"]
-        top_family_models_check = row["family_model_id"] in top_3_family_model_ids
+        family_model_check = ordered_family_model_ids[0] == row["family_model_id"]
+        top_3_family_models_check = row["family_model_id"] in ordered_family_model_ids[:min(3, len(ordered_family_model_ids))]
+        top_5_family_models_check = row["family_model_id"] in ordered_family_model_ids[:min(5, len(ordered_family_model_ids))]
+        top_10_family_models_check = row["family_model_id"] in ordered_family_model_ids[:min(10, len(ordered_family_model_ids))]
 
-    save_result(response_file_path, row, response, response_text, response_tokens, matches_df, most_common_family_id, top_3_family_model_ids)
-    return pd.Series([match_tids, template_check, most_common_family_id, family_check, top_3_family_model_ids, family_model_check, top_family_models_check])
+    save_result(response_file_path, row, response, response_text, response_tokens, matches_df, most_common_family_id, ordered_family_model_ids)
+    return pd.Series([match_tids, template_check, most_common_family_id, family_check, ordered_family_model_ids, family_model_check, top_3_family_models_check, top_5_family_models_check, top_10_family_models_check])
 
 
 # add result to df_test and save it
-df_test[['match_ids', 'template_check', 'match_family_id', 'family_check','top_3_family_model_ids', 'family_model_check', 'top_family_models_check']] = df_test.apply(process_row, axis=1) 
+df_test[['match_ids', 'template_check', 'match_family_id', 'family_check','ordered_family_model_ids', 'family_model_check', 'top_3_family_models_check', 'top_5_family_models_check', 'top_10_family_models_check']] = df_test.apply(process_row, axis=1) 
 df_test.to_csv(test_result_path, index=False)
 
 # Calculate accuracy
 template_match = df_test['template_check'].sum()
 family_match = df_test['family_check'].sum()
 family_model_match = df_test['family_model_check'].sum()
-top_family_models_match = df_test['top_family_models_check'].sum()
+top_3_family_models_match = df_test['top_3_family_models_check'].sum()
+top_5_family_models_match = df_test['top_5_family_models_check'].sum()
+top_10_family_models_match = df_test['top_10_family_models_check'].sum()
 total_predictions = len(df_test)
 template_accuracy_rate = template_match / total_predictions
 family_accuracy_rate = family_match / total_predictions
 family_model_accuracy_rate = family_model_match / total_predictions
-top_family_models_accuracy_rate = top_family_models_match / total_predictions
+top_3_family_models_accuracy_rate = top_3_family_models_match / total_predictions
+top_5_family_models_accuracy_rate = top_5_family_models_match / total_predictions
+top_10_family_models_accuracy_rate = top_10_family_models_match / total_predictions
 
 # add the summary back to text 
 with open(response_file_path, 'r') as file:
     existing_content = file.read()
 # Insert the new sentence at the beginning
-summary = f"template_id accuracy rate(25 returned template_ids): {template_accuracy_rate:.2%}\nfamily_id accuracy rate(most returned family_id): {family_accuracy_rate:.2%}\nfamily_model_id accuracy rate(most returned family_model_id): {family_model_accuracy_rate:.2%}\ntop 3 family_model_id accuracy rate: {top_family_models_accuracy_rate:.2%}\n\n\n"
+summary = f"template_id accuracy rate(25 returned template_ids): {template_accuracy_rate:.2%}\nfamily_id accuracy rate(most returned family_id): {family_accuracy_rate:.2%}\nfamily_model_id accuracy rate(most returned family_model_id): {family_model_accuracy_rate:.2%}\ntop_3_family_model_ids accuracy rate: {top_3_family_models_accuracy_rate:.2%}\ntop_5_family_model_ids accuracy rate: {top_5_family_models_accuracy_rate:.2%}\ntop_10_family_model_ids accuracy rate: {top_10_family_models_accuracy_rate:.2%}\n\n\n"
 modified_content = summary + existing_content
 # Write the modified content back to the file
 with open(response_file_path, 'w') as file:
@@ -128,5 +136,8 @@ print("test completed")
 print(f"template_id accuracy rate: {template_accuracy_rate:.2%}")
 print(f"family_id accuracy rate: {family_accuracy_rate:.2%}")
 print(f"family_model_id accuracy rate: {family_model_accuracy_rate:.2%}")
-print(f"top_family_model_ids accuracy rate: {top_family_models_accuracy_rate:.2%}")
+print(f"top_3_family_model_ids accuracy rate: {top_3_family_models_accuracy_rate:.2%}")
+print(f"top_5_family_model_ids accuracy rate: {top_5_family_models_accuracy_rate:.2%}")
+print(f"top_10_family_model_ids accuracy rate: {top_10_family_models_accuracy_rate:.2%}")
+
 
