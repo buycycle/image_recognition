@@ -22,6 +22,7 @@ LEFT JOIN families f ON b.family_id = f.id
 LEFT JOIN family_models fm ON b.family_model_id = fm.id
 LEFT JOIN brands br ON b.brand_id = br.id
 WHERE bf.sort_order = 0
+AND b.price >= 2000
 AND b.bike_template_id != 79204
 AND b.created_at < '2023-10-01'
 ORDER BY b.created_at DESC
@@ -105,7 +106,7 @@ def load_test_file(test_file_path):
         except requests.RequestException as e:
             print(f"An error occurred while trying to access {image_url}: {e}. Deleting row {index}.")
             invalid_rows.append(index)
-        
+
     # Drop invalid rows
     df_test.drop(invalid_rows, inplace=True, errors='ignore')
 

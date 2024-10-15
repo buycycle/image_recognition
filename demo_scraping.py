@@ -4,7 +4,7 @@ import configparser
 from driver import templates_query, processed_templates_path, general_words
 from helper import load_spacy_model, load_df_templates, get_matches_scraping
 
-# Load Spacy models for English 
+# Load Spacy models for English
 nlp_en = load_spacy_model('en_core_web_sm')
 stop_words = nlp_en.Defaults.stop_words
 
@@ -39,8 +39,8 @@ params = {
 }
 
 # get the top similarity matches
-response, response_text, response_tokens, matches_df = get_matches_scraping(url, params, df_templates, 25, nlp_en, general_words, stop_words)
-print(matches_df)
+response, response_text, response_tokens, matches_df = get_matches_scraping(url, params, df_templates, 5, nlp_en, general_words, stop_words)
+print(matches_df.to_string())
 
 
 # optional, saving result to the txt file
@@ -49,14 +49,14 @@ result_file_path = f"data/result-{folder_name}.txt"
 with open(result_file_path, 'w') as file:
     file.write(f"--- Result ---\n")
     file.write(f"Image url: {image_url}\n")
-    file.write(f"Top 25 matches: {matches_df}\n")
+    file.write(f"Top 5 matches: {matches_df.to_string()}\n")
     # Write the JSON response
     file.write("Response ->\n")
     file.write(json.dumps(response.json(), indent=4))
-    file.write("\n") 
+    file.write("\n")
     file.write(f"Extracted text: {response_text}\n")
     file.write(f"Preprocessed text: {response_tokens}\n")
-    file.write("\n")  
+    file.write("\n")
 print("Result saved!")
 
 

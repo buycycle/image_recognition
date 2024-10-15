@@ -58,7 +58,6 @@ def save_result(result_file_path, row, response, response_text, response_tokens,
             formatted_json = json.dumps(json_response, indent=4)
             file.write(f"Response -> {formatted_json}\n\n\n\n") 
 
-
 def process_row(row):
     """
     Process each row of the test data

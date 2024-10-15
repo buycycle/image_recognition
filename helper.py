@@ -26,11 +26,11 @@ def load_spacy_model(model_name):
 
 def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, stop_words):
     """
-    Load or download df_templates, 
-    which is based on table bike_templates and complement with extra columns, 
+    Load or download df_templates,
+    which is based on table bike_templates and complement with extra columns,
     and will be used in calculate similarity
-    
-    Returns: processed templates dataframe 
+
+    Returns: processed templates dataframe
     """
     if os.path.exists(csv_file_path):
         df_templates = pd.read_csv(csv_file_path)
@@ -56,11 +56,11 @@ def load_df_templates(csv_file_path, templates_query, nlp_en, general_words, sto
     return df_templates
 
 
-# Define the text preprocsiing steps, which will be used for both templates_df and response 
+# Define the text preprocsiing steps, which will be used for both templates_df and response
 def preprocess_text(text, nlp_en, general_words, stop_words):
     """
     Process the text before calculating the similarity
-    Returns: 
+    Returns:
         set(tokens), applied for templates_df preprocessing
         set(filtered_tokens), applied for response preprocessing
     """
@@ -69,7 +69,7 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
     text = text.lower()
     text = text.strip()
     text = re.sub(r'[^\w\s.]', ' ', text)  # Remove special characters except periods
-    
+
     # Process text using Spacy for English
     doc = nlp_en(text)
     tokens = [token.lemma_ for token in doc]
@@ -78,12 +78,26 @@ def preprocess_text(text, nlp_en, general_words, stop_words):
     tokens = [word for word in tokens if word not in stop_words and word not in general_words and word.strip() and word != "."]
 
     # further process for request string
-    # take 10 results, filter the words appear more then 3 times 
+    # take 10 results, filter the words appear more then 3 times
     token_counts = Counter(tokens)
     filtered_tokens = [word for word in tokens if token_counts[word] > 3]
 
     return set(tokens), set(filtered_tokens)
 
+def preprocess_text(text, nlp_en, general_words, stop_words):
+    """
+    Process the text to extract a set of words, including years.
+    Returns:
+        set(tokens)
+    """
+    if not isinstance(text, str):
+        text = str(text)
+    text = text.lower()
+    text = text.strip()
+    text = re.sub(r'[^\w\s]', ' ', text)  # Remove special characters
+    # Split the text into words
+    tokens = text.split()
+    return set(tokens), set(tokens)
 
 def jaccard_similarity(set1, set2):
     """
@@ -129,7 +143,7 @@ def get_matches_scraping(url, params, df_templates, num, nlp_en, general_words, 
         top_matches = df_templates.nlargest(num, 'similarity')
 
         return response, response_text, response_tokens, top_matches
-    
+
     print("No result found.")
     return response, None, None, None
 
