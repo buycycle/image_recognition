@@ -5,7 +5,7 @@ import configparser
 from collections import Counter
 from driver import templates_query, processed_templates_path, general_words
 from helper import load_spacy_model, load_df_templates, get_matches_scraping
-from create_test_data import load_test_file
+from create_test_data import load_test_file, test_data_query, most_used_family_model_id
 
 # Read the API key from config.ini
 config = configparser.ConfigParser()
@@ -18,7 +18,7 @@ test_result_path = f"data/test_with_matches_{timestamp}.csv"
 test_file_path = f"data/test_df_{timestamp}.csv"
 
 # load test data
-df_test = load_test_file(test_file_path)
+df_test = load_test_file(most_used_family_model_id, test_file_path)
 
 # Load SpaCy models for English and German
 nlp_en = load_spacy_model('en_core_web_sm')
